@@ -9,9 +9,8 @@ public class Vector2Generation : MonoBehaviour {
     public float maxBGX;
     public float maxBGY;
 
-    public float Variable1 = 0;
-    public float Variable2 = 0;
-    public float Variable3 = 0;
+    public float stoneMin;
+    public float stoneMax;
 
     //private Vector2 backgroundSize;
 
@@ -62,12 +61,12 @@ public class Vector2Generation : MonoBehaviour {
 
         for (int y = 0; y < 5; y++)
         {
-            for (int x = 0; x < 30; x++)
+            for (int x = 0; x < 39; x++)
             {
                 float newX = xStart + width * x;
                 float newY = yStart + height * y;
 
-                float noise = Mathf.PerlinNoise(x / 10.0f, y / 10.0f);
+                float noise = Mathf.PerlinNoise(x / 10.0f, y / 10.0f) * Random.Range(stoneMin, stoneMax);
 
                 if (noise > 0.4f)
                 {

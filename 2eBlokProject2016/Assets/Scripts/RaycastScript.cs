@@ -16,13 +16,36 @@ public class RaycastScript : MonoBehaviour {
 
     private Rigidbody2D rigidbodyPickedObject;
 
+<<<<<<< HEAD
     private StoneStats stoneBlocks;
     private CloudStats cloudBlocks;
     private DirtStats dirtBlocks;
 
+    private KeyCode pickAndThrowInput;
+
+=======
+    private KeyCode PickAndThrowInput;
+    
+>>>>>>> 85f4a045e03d743ebd77a053ddeb9cdfdbba5cc8
     void Start()
     {
-        
+        if (this.gameObject.tag == "Player")
+        {
+<<<<<<< HEAD
+            pickAndThrowInput = KeyCode.Space;
+        }
+        else if (this.gameObject.tag == "Player2")
+        {
+            pickAndThrowInput = KeyCode.Alpha1;
+=======
+            PickAndThrowInput = KeyCode.Space;
+
+        }
+        else if (this.gameObject.tag == "Player2")
+        {
+            PickAndThrowInput = KeyCode.Alpha1;
+>>>>>>> 85f4a045e03d743ebd77a053ddeb9cdfdbba5cc8
+        }
     }
 
 	// Update is called once per frame
@@ -45,7 +68,11 @@ public class RaycastScript : MonoBehaviour {
 
     void RaycastBottom()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+<<<<<<< HEAD
+        if (Input.GetKeyDown(pickAndThrowInput))
+=======
+        if (Input.GetKeyDown(PickAndThrowInput))
+>>>>>>> 85f4a045e03d743ebd77a053ddeb9cdfdbba5cc8
         {
             //  First time when spacebar is pressed
             if (pickedUp == false) {

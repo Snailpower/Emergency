@@ -15,7 +15,10 @@ public class PickedObjectScript : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        DestroyObject(other.gameObject, 0.01f);
-        DestroyObject(this.gameObject, 0.01f);
+        if (other.collider.CompareTag("Ground"))
+        {
+            DestroyObject(other.gameObject, 0.01f);
+            DestroyObject(this.gameObject, 0.01f);
+        }
     }
 }

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/AssetsNEW/Scenes/BackgroundGeneration.unity
+- path: Assets/Scenes/BackgroundGeneration.unity
   isLoaded: 1
   isActive: 1

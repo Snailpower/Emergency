@@ -2,13 +2,50 @@
 using System.Collections;
 
 public class MovingScript : MonoBehaviour {
-    
+
+    public GameObject player;
+    public bool isGrounded = false;
+
     private float PlayerSpeed = 10;
+    private int jumpPower = 500;
     private bool goingRight = true;
+
+    private KeyCode leftInput;
+    private KeyCode rightInput;
+    private KeyCode jumpInput;
+
+    private string horizontalAxis;
+    private string verticalAxis;
+
+    private Rigidbody2D playerRigidbody;
 
     // Use this for initialization
     void Start () {
+        AssignRightInputToPlayer();
 
+        playerRigidbody = player.GetComponent<Rigidbody2D>();
+    }
+
+    void AssignRightInputToPlayer()
+    {
+        if (this.gameObject.tag == "Player")
+        {
+            leftInput = KeyCode.LeftArrow;
+            rightInput = KeyCode.RightArrow;
+            jumpInput = KeyCode.UpArrow;
+
+            horizontalAxis = "HorizontalPlayer1";
+            verticalAxis = "VerticalPlayer1";
+        }
+        else if (this.gameObject.tag == "Player2")
+        {
+            leftInput = KeyCode.A;
+            rightInput = KeyCode.D;
+            jumpInput = KeyCode.W;
+
+            horizontalAxis = "HorizontalPlayer2";
+            verticalAxis = "VerticalPlayer2";
+        }
     }
 
     // Update is called once per frame
@@ -37,10 +74,10 @@ public class MovingScript : MonoBehaviour {
     void PlayerMovementRight()
     {
         //  makes the player able to go right
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(rightInput))
         {
-            float horizontal = Input.GetAxis("Horizontal");
-            transform.Translate(Vector2.right * horizontal * PlayerSpeed * Time.deltaTime);
+            float horizontal = Input.GetAxis(horizontalAxis);
+            player.transform.Translate(Vector2.right * horizontal * PlayerSpeed * Time.deltaTime);
 
             goingRight = true;
         }
@@ -49,10 +86,10 @@ public class MovingScript : MonoBehaviour {
     void PlayerMovementLeft()
     {
         // makes the player able to go left
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(leftInput))
         {
-            float horizontal = Input.GetAxis("Horizontal");
-            transform.Translate(Vector2.left * horizontal * PlayerSpeed * Time.deltaTime);
+            float horizontal = Input.GetAxis(horizontalAxis);
+            player.transform.Translate(Vector2.left * horizontal * PlayerSpeed * Time.deltaTime);
 
             goingRight = false;
         }
@@ -60,11 +97,10 @@ public class MovingScript : MonoBehaviour {
 
     void PlayerMovementUp()
     {
-        //  makes the player jump
-        if (Input.GetKey(KeyCode.UpArrow))
+        //  makes the player jump if the player is grounded
+        if (Input.GetKeyDown(jumpInput) && isGrounded == true)
         {
-            float vertical = Input.GetAxis("Vertical");
-            transform.Translate(Vector2.up * vertical * PlayerSpeed * Time.deltaTime);
+            playerRigidbody.AddForce(transform.up * jumpPower);
         }
     }
 }

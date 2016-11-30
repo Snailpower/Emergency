@@ -13,7 +13,22 @@ public class RaycastScript : MonoBehaviour {
     private float throwForce = 2000.0f;
 
     private Rigidbody2D rigidbodyPickedObject;
+
+    private KeyCode PickAndThrowInput;
     
+    void Start()
+    {
+        if (this.gameObject.tag == "Player")
+        {
+            PickAndThrowInput = KeyCode.Space;
+
+        }
+        else if (this.gameObject.tag == "Player2")
+        {
+            PickAndThrowInput = KeyCode.Alpha1;
+        }
+    }
+
 	// Update is called once per frame
 	void Update () {
         ObjectPoint = new Vector2(transform.position.x, transform.position.y + distanceFromPlayer);
@@ -31,7 +46,7 @@ public class RaycastScript : MonoBehaviour {
 
     void RaycastBottom()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(PickAndThrowInput))
         {
             //  First time when spacebar is pressed
             if (pickedUp == false) {

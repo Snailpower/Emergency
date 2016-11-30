@@ -20,9 +20,18 @@ public class RaycastScript : MonoBehaviour {
     private CloudStats cloudBlocks;
     private DirtStats dirtBlocks;
 
+    private KeyCode pickAndThrowInput;
+
     void Start()
     {
-        
+        if (this.gameObject.tag == "Player")
+        {
+            pickAndThrowInput = KeyCode.Space;
+        }
+        else if (this.gameObject.tag == "Player2")
+        {
+            pickAndThrowInput = KeyCode.Alpha1;
+        }
     }
 
 	// Update is called once per frame
@@ -45,7 +54,7 @@ public class RaycastScript : MonoBehaviour {
 
     void RaycastBottom()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(pickAndThrowInput))
         {
             //  First time when spacebar is pressed
             if (pickedUp == false) {

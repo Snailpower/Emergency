@@ -62,12 +62,12 @@ public class MovingScript : MonoBehaviour {
         if(goingRight == true)
         {
             //  make the character look to the right
-            this.transform.rotation = Quaternion.Euler(0, 0, 0);
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else if(goingRight == false)
         {
             // make the character look to the left
-            this.transform.rotation = Quaternion.Euler(0, 180, 0);
+            gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
 

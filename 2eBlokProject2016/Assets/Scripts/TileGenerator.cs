@@ -45,9 +45,9 @@ public class TileGenerator : MonoBehaviour {
         float xStart = 0.5f;
         float yStart = 0.5f;
 
-        for (int y = 12; y < 20; y++)
+        for (int y = 12; y < 30; y++)
         {
-            for (int x = 0; x < 35; x++)
+            for (int x = -20; x < 67; x++)
             {
                 float newX = xStart + width * x;
                 float newY = yStart + height * y;
@@ -77,9 +77,9 @@ public class TileGenerator : MonoBehaviour {
         float xStart = 0.5f;
         float yStart = 0.5f;
 
-        for (int y = 0; y < 5; y++)
+        for (int y = -11; y < 5; y++)
         {
-            for (int x = 0; x < 40; x++)
+            for (int x = -22; x < 67; x++)
             {
                 float newX = xStart + width * x;
                 float newY = yStart + height * y;

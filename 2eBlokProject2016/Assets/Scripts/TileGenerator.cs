@@ -20,15 +20,11 @@ public class TileGenerator : MonoBehaviour {
     public float cloudMin;
     public float cloudMax;
 
-    //private Vector2 backgroundSize;
-
     // Use this for initialization
     void Start () {
 
         GroundPatternGeneration();
         SkyPatternGeneration();
-
-        //NoiseGeneration(Variable1, Variable2, Variable3);
 
 
     }
@@ -100,6 +96,8 @@ public class TileGenerator : MonoBehaviour {
                     Instantiate(stoneBGPrefab, new Vector3(newX, newY, 0), Quaternion.identity, backgroundTileStorage.transform);
                     Instantiate(stoneBlockPrefab, new Vector3(newX, newY, 0), Quaternion.identity, levelBlockStorage.transform);
                 }
+
+                //Sets the first layer of the ground to dirt
                 else if(y <= 4 && noise < 0.4f)
                 {
                     Instantiate(dirtBGPrefab, new Vector3(newX, newY, 0), Quaternion.identity, backgroundTileStorage.transform);

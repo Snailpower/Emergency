@@ -3,6 +3,8 @@ using System.Collections;
 
 public class RaycastScript : MonoBehaviour {
 
+    static public bool isThrown = false;
+
     private bool pickedUp = false;
 
     private GameObject PickedObject;
@@ -15,20 +17,23 @@ public class RaycastScript : MonoBehaviour {
 
     private Rigidbody2D rigidbodyPickedObject;
 
+<<<<<<< HEAD
     private KeyCode PickAndThrowInput;
 
  
+=======
+    private KeyCode pickAndThrowInput;
+>>>>>>> cfa54643a0bc815fdad0c3a538d356fd10c9062c
     
     void Start()
     {
         if (this.gameObject.tag == "Player")
         {
-            PickAndThrowInput = KeyCode.Space;
-
+            pickAndThrowInput = KeyCode.Space;
         }
         else if (this.gameObject.tag == "Player2")
         {
-            PickAndThrowInput = KeyCode.Alpha1;
+            pickAndThrowInput = KeyCode.Alpha1;
         }
     }
 
@@ -42,7 +47,12 @@ public class RaycastScript : MonoBehaviour {
             PickedObject.transform.position = ObjectPoint;
         }
 
+<<<<<<< HEAD
         Digging();
+=======
+        Debug.Log(isThrown);
+
+>>>>>>> cfa54643a0bc815fdad0c3a538d356fd10c9062c
     }
 
     void FixedUpdate() {
@@ -52,7 +62,7 @@ public class RaycastScript : MonoBehaviour {
 
     void RaycastBottom()
     {
-        if (Input.GetKeyDown(PickAndThrowInput))
+        if (Input.GetKeyDown(pickAndThrowInput))
         {
             //  First time when spacebar is pressed
             if (pickedUp == false) {
@@ -62,6 +72,7 @@ public class RaycastScript : MonoBehaviour {
             //  second time spacebar is pressed
             else if (pickedUp == true) {
                 ShootObject();
+                isThrown = true;
             }
         }
     }
@@ -76,11 +87,14 @@ public class RaycastScript : MonoBehaviour {
 
         if (hit.collider != null)
         {
-            if (hit.collider.gameObject.tag == "Ground")    //  it works but it hits the player first
+            if (hit.collider.gameObject.tag == "Dirt" || hit.collider.gameObject.tag == "Stone" || hit.collider.gameObject.tag == "Cloud")    //  it works but it hits the player first
             {
                 GameObject other = hit.collider.gameObject;
 
                 PickedObject = other.gameObject;
+
+                other.tag = "PickedUpObject";
+
                 pickedUp = true;
             }
         }
@@ -90,7 +104,6 @@ public class RaycastScript : MonoBehaviour {
     {
         rigidbodyPickedObject = PickedObject.GetComponent<Rigidbody2D>();  // Tom already has  a rigidbody
         rigidbodyPickedObject.isKinematic = false;
-        PickedObject.AddComponent<PickedObjectScript>();
 
         rigidbodyPickedObject.AddForce(transform.right * throwForce);
         pickedUp = false;

@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Scene1.unity
+=======
+- path: Assets/Scenes/BackgroundGeneration.unity
+>>>>>>> cfa54643a0bc815fdad0c3a538d356fd10c9062c
   isLoaded: 1
   isActive: 1

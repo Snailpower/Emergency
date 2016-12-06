@@ -57,6 +57,11 @@ public class MovingScript : MonoBehaviour {
         RotateCharacter();
     }
 
+    void OnCollisionEnter2D()
+    {
+        isGrounded = true;
+    }
+
     void RotateCharacter()
     {
         if(goingRight == true)
@@ -101,6 +106,7 @@ public class MovingScript : MonoBehaviour {
         if (Input.GetKeyDown(jumpInput) && isGrounded == true)
         {
             playerRigidbody.AddForce(transform.up * jumpPower);
+            isGrounded = false;
         }
     }
 }

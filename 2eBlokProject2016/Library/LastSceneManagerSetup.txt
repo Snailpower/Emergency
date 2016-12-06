@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/BackgroundGeneration.unity
+=======
+- path: Assets/Scenes/TomScene.unity
+>>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
   isLoaded: 1
   isActive: 1

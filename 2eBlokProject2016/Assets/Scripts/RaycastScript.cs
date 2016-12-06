@@ -21,9 +21,15 @@ public class RaycastScript : MonoBehaviour {
     private float lengthFromPlayerDigging = 0.5f;
 
     private Rigidbody2D rigidbodyPickedObject;
+<<<<<<< HEAD
     
     private KeyCode pickAndThrowInput;
     private KeyCode holdToDig;
+=======
+
+    private KeyCode pickAndThrowInput;
+
+>>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
     
     void Start()
     {
@@ -59,10 +65,16 @@ public class RaycastScript : MonoBehaviour {
     {
         ObjectPoint = new Vector2(transform.position.x, transform.position.y + distanceFromPlayer);
 
+<<<<<<< HEAD
         diggingObjectPointLeft = new Vector2(transform.position.x + distanceFromPlayer, transform.position.y + distanceFromPlayer);
         diggingObjectPointRight = new Vector2(transform.position.x - distanceFromPlayer, transform.position.y + distanceFromPlayer);
 
         diggingObjectPointHorizontal = new Vector2(transform.position.x, transform.position.y + distanceFromPlayer + 5);
+=======
+        Digging();
+
+        Debug.Log(isThrown);
+>>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
     }
 
 
@@ -118,18 +130,30 @@ public class RaycastScript : MonoBehaviour {
 
     void Digging()
     {
+<<<<<<< HEAD
         if(Input.GetKey(KeyCode.DownArrow) && Input.GetKey(holdToDig))
+=======
+        if(Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.B))
+>>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
         {
             Debug.Log("It is digging down");
             DoDigging();
         }
 
+<<<<<<< HEAD
         if(Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(holdToDig))
+=======
+        if(Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.B))
+>>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
         {
             DoDiggingLeft();
         }
 
+<<<<<<< HEAD
         if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(holdToDig))
+=======
+        if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.B))
+>>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
         {
             DoDiggingRight();
         }
@@ -145,12 +169,17 @@ public class RaycastScript : MonoBehaviour {
 
         if (hit.collider != null)
         {
+<<<<<<< HEAD
             if(hit.collider.gameObject.tag == "Stone" || hit.collider.gameObject.tag == "Dirt")
+=======
+            if(hit.collider.gameObject.tag == "Dirt" || hit.collider.gameObject.tag == "Stone")
+>>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
             {
                 // change position
                 GameObject other = hit.collider.gameObject;
                 other.transform.position = diggingObjectPointHorizontal;
                 other.GetComponent<Rigidbody2D>().AddForce(Vector2.up * throwForce);
+                other.GetComponent<Rigidbody2D>().isKinematic = false;
             }
         }
     }
@@ -165,11 +194,16 @@ public class RaycastScript : MonoBehaviour {
 
         if (hit.collider != null)
         {
+<<<<<<< HEAD
             if (hit.collider.gameObject.tag == "Stone" || hit.collider.gameObject.tag == "Dirt")
+=======
+            if (hit.collider.gameObject.tag == "Dirt" || hit.collider.gameObject.tag == "Stone")
+>>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
             {
                 GameObject other = hit.collider.gameObject;
                 other.transform.position = diggingObjectPointHorizontal;
                 other.GetComponent<Rigidbody2D>().AddForce(Vector2.up * throwForce);
+                other.GetComponent<Rigidbody2D>().isKinematic = false;
             }
         }
     }
@@ -189,6 +223,7 @@ public class RaycastScript : MonoBehaviour {
         // Right raycast
         if (hitRight.collider != null)
         {
+<<<<<<< HEAD
             if (hitRight.collider.gameObject.tag == "Stone" || hitRight.collider.gameObject.tag == "Dirt")    //  it works but it hits the player first
             {
                 GameObject other = hitRight.collider.gameObject;
@@ -197,11 +232,21 @@ public class RaycastScript : MonoBehaviour {
                 other.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 1);
 
                 Debug.Log("RIGHT raycast");
+=======
+            if (hitRight.collider.gameObject.tag == "Dirt" || hitRight.collider.gameObject.tag == "Stone")    //  it works but it hits the player first
+            {
+                GameObject other = hitRight.collider.gameObject;
+
+                other.transform.position = ObjectPoint; // change position
+                other.GetComponent<Rigidbody2D>().AddForce(Vector2.up * throwForce);
+                other.GetComponent<Rigidbody2D>().isKinematic = false;
+>>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
             }
         }
         //  Left raycast
         if (hitLeft.collider != null)
         {
+<<<<<<< HEAD
             if (hitLeft.collider.gameObject.tag == "Stone" || hitLeft.collider.gameObject.tag == "Dirt")    //  it works but it hits the player first
             {
                 GameObject other = hitRight.collider.gameObject;
@@ -210,6 +255,19 @@ public class RaycastScript : MonoBehaviour {
                 other.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 1);
 
                 Debug.Log("LEFT raycast");
+=======
+            if (hitLeft.collider.gameObject.tag == "Dirt" || hitRight.collider.gameObject.tag == "Stone")    //  it works but it hits the player first
+            {
+                GameObject other = hitRight.collider.gameObject;
+
+                other.transform.position = ObjectPoint; // change position
+                other.GetComponent<Rigidbody2D>().AddForce(Vector2.up * throwForce);
+                other.GetComponent<Rigidbody2D>().isKinematic = false;
+            }
+            else
+            {
+
+>>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
             }
         }
     }

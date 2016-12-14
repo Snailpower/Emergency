@@ -8,14 +8,13 @@ public class MovingScript : MonoBehaviour {
 
     private float PlayerSpeed = 10;
     private int jumpPower = 500;
-    private bool goingRight = true;
+    public bool goingRight = true;
 
     private KeyCode leftInput;
     private KeyCode rightInput;
     private KeyCode jumpInput;
 
     private string horizontalAxis;
-    private string verticalAxis;
 
     private Rigidbody2D playerRigidbody;
 
@@ -35,7 +34,6 @@ public class MovingScript : MonoBehaviour {
             jumpInput = KeyCode.UpArrow;
 
             horizontalAxis = "HorizontalPlayer1";
-            verticalAxis = "VerticalPlayer1";
         }
         else if (this.gameObject.tag == "Player2")
         {
@@ -44,7 +42,6 @@ public class MovingScript : MonoBehaviour {
             jumpInput = KeyCode.W;
 
             horizontalAxis = "HorizontalPlayer2";
-            verticalAxis = "VerticalPlayer2";
         }
     }
 

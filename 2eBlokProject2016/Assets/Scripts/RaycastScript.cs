@@ -13,11 +13,9 @@ public class RaycastScript : MonoBehaviour {
     private Transform aimingArrowTransform;
 
     private Vector2 ObjectPoint;    // the point where the picked-up block goes to
-<<<<<<< HEAD
-=======
+
     private Vector2 putDownPoint;   // the point before the player where the block can be putt down
     private Vector2 raycastposition;    //  the position from where the ray is cast
->>>>>>> f9b57e03ad8e9f8a26058ecba9290b042a04354c
 
     private float distanceFromPlayer = 4.0f;
     private float throwForce = 2000.0f;
@@ -29,27 +27,14 @@ public class RaycastScript : MonoBehaviour {
     private float distanceBlockPutDown = 2.0f;
 
     private Rigidbody2D rigidbodyPickedObject;
-<<<<<<< HEAD
 
     private float pickupInput;
     private float throwInput;
     private float throwDirectionInputHorizontal;
     private float throwDirectionInputVertical;
-    
-    void Start()
-    {
-        arrow = gameObject.transform.GetChild(0).gameObject;
 
-    }
-
-	// Update is called once per frame
-	void Update ()
-    {
-        GetAxis();
-
-=======
     private MovingScript movingScriptVariable;
-    
+
     private KeyCode pickAndThrowInput;
 
     private bool isGrounded;
@@ -61,15 +46,8 @@ public class RaycastScript : MonoBehaviour {
     void Start()
     {
         raycastposition = new Vector2(transform.position.x, transform.position.y - 0.5f);
-        
-        if (this.gameObject.tag == "Player")
-        {
-            pickAndThrowInput = KeyCode.Space;
-        }
-        else if (this.gameObject.tag == "Player2")
-        {
-            pickAndThrowInput = KeyCode.Alpha1;
-        }
+
+        arrow = gameObject.transform.GetChild(0).gameObject;
     }
 
 	// Update is called once per frame
@@ -81,16 +59,15 @@ public class RaycastScript : MonoBehaviour {
         {
             PickedObject.transform.position = putDownPoint;
         }
-        
+
+        GetAxis();
         AdaptPutDownPoint();
         putDownObject();
->>>>>>> f9b57e03ad8e9f8a26058ecba9290b042a04354c
         RaycastBottom();
         SettingPoints();
         CheckPickedUp();
     }
 
-<<<<<<< HEAD
     private void GetAxis()
     {
         if (this.gameObject.tag == "Player")
@@ -124,7 +101,10 @@ public class RaycastScript : MonoBehaviour {
             throwInput = Input.GetAxis("Joystick4Throw");
             throwDirectionInputHorizontal = Input.GetAxis("Horizontal2Player4");
             throwDirectionInputVertical = Input.GetAxis("Vertical2Player4");
-=======
+        }
+
+    }
+
     void AdaptPutDownPoint()
     {
         //  changes the putDownPoint based on the direction of the player
@@ -135,7 +115,6 @@ public class RaycastScript : MonoBehaviour {
         else if (goingRight == false)
         {
             putDownPoint = new Vector2(transform.position.x - distanceBlockPutDown, transform.position.y + heightBlockPutDown);  // updates the point before the player where the object can be put
->>>>>>> f9b57e03ad8e9f8a26058ecba9290b042a04354c
         }
     }
 
@@ -163,8 +142,6 @@ public class RaycastScript : MonoBehaviour {
     {
         ObjectPoint = new Vector2(transform.position.x, transform.position.y + distanceFromPlayer);
     }
-<<<<<<< HEAD
-=======
 
     void putDownObject()
     {
@@ -175,7 +152,6 @@ public class RaycastScript : MonoBehaviour {
 
         // maybe check if it has an object
         //  shows the location
->>>>>>> f9b57e03ad8e9f8a26058ecba9290b042a04354c
 
         if(inHand == true)
         {
@@ -202,7 +178,6 @@ public class RaycastScript : MonoBehaviour {
 
     void RaycastBottom()
     {
-<<<<<<< HEAD
         if (pickedUp == true)
         {
             arrow.SetActive(true);
@@ -223,44 +198,6 @@ public class RaycastScript : MonoBehaviour {
             arrow.SetActive(false);
         }
 
-    }
-
-    void PickUpObject()
-    {
-        Vector2 raycastposition = new Vector2(transform.position.x, transform.position.y - 0.5f);
-
-        RaycastHit2D hit;
-
-        if (hit = Physics2D.Raycast(raycastposition, Vector2.down, 2.0f))
-        {
-            if (hit.collider != null)
-            {
-                Debug.Log(hit.collider.gameObject.tag);
-
-                if (hit.collider.gameObject.tag == "Dirt" || hit.collider.gameObject.tag == "Stone" || hit.collider.gameObject.tag == "Cloud")    //  it works but it hits the player first
-                {
-                    GameObject other = hit.collider.gameObject;
-
-                    PickedObject = other.gameObject;
-
-                    other.tag = "PickedUpObject";
-
-                    pickedUp = true;
-                }
-=======
-        if (Input.GetKeyDown(pickAndThrowInput))
-        {
-            //  First time when spacebar is pressed
-            if (pickedUp == false) {
-                PickUpObject();
-            }
-
-            //  second time spacebar is pressed
-            else if (pickedUp == true) {
-                ShootObject();
-                isThrown = true;
-            }
-        }
     }
 
     void PickUpObject()
@@ -296,7 +233,6 @@ public class RaycastScript : MonoBehaviour {
             if (movingScriptVariable.isGrounded)
             {
                 PickUpObject();
->>>>>>> f9b57e03ad8e9f8a26058ecba9290b042a04354c
             }
         }
 
@@ -305,7 +241,6 @@ public class RaycastScript : MonoBehaviour {
 
     void ShootObject()
     {
-<<<<<<< HEAD
         Vector2 throwInput = new Vector2(throwDirectionInputHorizontal, throwDirectionInputVertical);
 
 
@@ -316,17 +251,7 @@ public class RaycastScript : MonoBehaviour {
 
         Debug.Log("Horizontal" + throwDirectionInputHorizontal + "Vertical" + throwDirectionInputVertical);
 
-        pickedUp = false;
-    }
-
-
-=======
-        rigidbodyPickedObject = PickedObject.GetComponent<Rigidbody2D>();  // Tom already has  a rigidbody
-        rigidbodyPickedObject.isKinematic = false;
-
-        rigidbodyPickedObject.AddForce(transform.right * throwForce);
         rigidbodyPickedObject = null;
         pickedUp = false;
     }
->>>>>>> f9b57e03ad8e9f8a26058ecba9290b042a04354c
 }

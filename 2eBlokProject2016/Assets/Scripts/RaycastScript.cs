@@ -202,8 +202,10 @@ public class RaycastScript : MonoBehaviour {
 
     void PickUpObject()
     {
-        Vector2 raycastposition = new Vector2(transform.position.x, transform.position.y - 0.5f);
+        Vector2 raycastposition = new Vector2(transform.position.x, transform.position.y - 1.5f);
         RaycastHit2D hit = Physics2D.Raycast(raycastposition, Vector2.down, rayLength);
+
+        Debug.Log(hit.collider.tag);
 
         if (hit.collider != null)
         {

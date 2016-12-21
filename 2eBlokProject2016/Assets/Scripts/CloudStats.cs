@@ -47,6 +47,30 @@ public class CloudStats : MonoBehaviour {
                 gameObject.tag = "Cloud";
                 RaycastScript.isThrown = false;
             }
+
+            if (other.gameObject.tag == "Player")
+            {
+                gameObject.tag = "Cloud";
+                RaycastScript.isThrown = false;
+            }
+
+            if (other.gameObject.tag == "Player2")
+            {
+                gameObject.tag = "Cloud";
+                RaycastScript.isThrown = false;
+            }
+
+            if (other.gameObject.tag == "Player3")
+            {
+                gameObject.tag = "Cloud";
+                RaycastScript.isThrown = false;
+            }
+
+            if (other.gameObject.tag == "Player4")
+            {
+                gameObject.tag = "Cloud";
+                RaycastScript.isThrown = false;
+            }
         }
 
         

@@ -49,7 +49,31 @@ public class DirtStats : MonoBehaviour {
                 gameObject.tag = "Dirt";
                 RaycastScript.isThrown = false;
             }
-          }
+
+            if (other.gameObject.tag == "Player")
+            {
+                gameObject.tag = "Dirt";
+                RaycastScript.isThrown = false;
+            }
+
+            if (other.gameObject.tag == "Player2")
+            {
+                gameObject.tag = "Dirt";
+                RaycastScript.isThrown = false;
+            }
+
+            if (other.gameObject.tag == "Player3")
+            {
+                gameObject.tag = "Dirt";
+                RaycastScript.isThrown = false;
+            }
+
+            if (other.gameObject.tag == "Player4")
+            {
+                gameObject.tag = "Dirt";
+                RaycastScript.isThrown = false;
+            }
+        }
 
         
     }

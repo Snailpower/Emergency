@@ -43,6 +43,30 @@ public class StoneStats : MonoBehaviour {
                 gameObject.tag = "Stone";
                 RaycastScript.isThrown = false;
             }
+
+            if (other.gameObject.tag == "Player")
+            {
+                gameObject.tag = "Stone";
+                RaycastScript.isThrown = false;
+            }
+
+            if (other.gameObject.tag == "Player2")
+            {
+                gameObject.tag = "Stone";
+                RaycastScript.isThrown = false;
+            }
+
+            if (other.gameObject.tag == "Player3")
+            {
+                gameObject.tag = "Stone";
+                RaycastScript.isThrown = false;
+            }
+
+            if (other.gameObject.tag == "Player4")
+            {
+                gameObject.tag = "Stone";
+                RaycastScript.isThrown = false;
+            }
         }
 
         

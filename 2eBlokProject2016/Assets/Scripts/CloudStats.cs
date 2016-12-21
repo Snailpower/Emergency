@@ -16,7 +16,7 @@ public class CloudStats : MonoBehaviour {
         playerController = GetComponent<RaycastScript>();
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionEnter(Collision other)
     {
         DirtStats otherDirtValues = other.gameObject.GetComponent<DirtStats>();
         CloudStats otherCloudValues = other.gameObject.GetComponent<CloudStats>();
@@ -53,7 +53,7 @@ public class CloudStats : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 	    
         if (cloudHP <= 0)
         {

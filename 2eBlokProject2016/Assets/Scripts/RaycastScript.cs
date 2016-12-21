@@ -9,53 +9,92 @@ public class RaycastScript : MonoBehaviour {
 
     private GameObject PickedObject;
 
-    private Vector2 ObjectPoint;    // the point where the picked-up block goes to
-    public Vector2 diggingObjectPointLeft; // digging down left raycast use this point
-    private Vector2 diggingObjectPointRight;    //  digging down right raycast use this point
-    private Vector2 diggingObjectPointHorizontal; // digging left or right use this point
+    private GameObject arrow;
 
-    private float distanceFromPlayer = 2.0f;
+    private Transform aimingArrowTransform;
+
+    private Vector2 ObjectPoint;    // the point where the picked-up block goes to
+
+    private float distanceFromPlayer = 4.0f;
     private float throwForce = 2000.0f;
     private float rayLength = 100;
     private float lenghtFromPlayerHorizontal = 0.2f;
     private float lengthFromPlayerDigging = 0.5f;
 
     private Rigidbody2D rigidbodyPickedObject;
-<<<<<<< HEAD
-    
-    private KeyCode pickAndThrowInput;
-    private KeyCode holdToDig;
-=======
 
-    private KeyCode pickAndThrowInput;
-
->>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
+    private float pickupInput;
+    private float throwInput;
+    private float throwDirectionInputHorizontal;
+    private float throwDirectionInputVertical;
     
     void Start()
     {
-        if (this.gameObject.tag == "Player")
-        {
-            pickAndThrowInput = KeyCode.Space;
-            holdToDig = KeyCode.B;
-        }
-        else if (this.gameObject.tag == "Player2")
-        {
-            pickAndThrowInput = KeyCode.Alpha1;
-            holdToDig = KeyCode.Alpha2;
-        }
+        arrow = gameObject.transform.GetChild(0).gameObject;
+
     }
 
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+        GetAxis();
+
         RaycastBottom();
         SettingPoints();
         CheckPickedUp();
-        Digging();
+    }
+
+    private void GetAxis()
+    {
+        if (this.gameObject.tag == "Player")
+        {
+            pickupInput = Input.GetAxis("Joystick1Pickup");
+            throwInput = Input.GetAxis("Joystick1Throw");
+            throwDirectionInputHorizontal = Input.GetAxis("Horizontal2Player1");
+            throwDirectionInputVertical = Input.GetAxis("Vertical2Player1");
+
+            Debug.Log("pickedUp " + pickedUp);
+            Debug.Log("LT AXIS " + pickupInput);
+            Debug.Log("RT AXIS " + throwInput);
+        }
+        else if (this.gameObject.tag == "Player2")
+        {
+            pickupInput = Input.GetAxis("Joystick2Pickup");
+            throwInput = Input.GetAxis("Joystick2Throw");
+            throwDirectionInputHorizontal = Input.GetAxis("Horizontal2Player2");
+            throwDirectionInputVertical = Input.GetAxis("Vertical2Player2");
+        }
+        else if (this.gameObject.tag == "Player3")
+        {
+            pickupInput = Input.GetAxis("Joystick3Pickup");
+            throwInput = Input.GetAxis("Joystick3Throw");
+            throwDirectionInputHorizontal = Input.GetAxis("Horizontal2Player3");
+            throwDirectionInputVertical = Input.GetAxis("Vertical2Player3");
+        }
+        else if (this.gameObject.tag == "Player4")
+        {
+            pickupInput = Input.GetAxis("Joystick4Pickup");
+            throwInput = Input.GetAxis("Joystick4Throw");
+            throwDirectionInputHorizontal = Input.GetAxis("Horizontal2Player4");
+            throwDirectionInputVertical = Input.GetAxis("Vertical2Player4");
+        }
     }
 
     void CheckPickedUp()
     {
-        if (pickedUp == true)
+        if (pickedUp == true && this.gameObject.tag == "Player")
+        {
+            PickedObject.transform.position = ObjectPoint;
+        }
+        else if (pickedUp == true && this.gameObject.tag == "Player2")
+        {
+            PickedObject.transform.position = ObjectPoint;
+        }
+        else if (pickedUp == true && this.gameObject.tag == "Player3")
+        {
+            PickedObject.transform.position = ObjectPoint;
+        }
+        else if (pickedUp == true && this.gameObject.tag == "Player4")
         {
             PickedObject.transform.position = ObjectPoint;
         }
@@ -64,211 +103,76 @@ public class RaycastScript : MonoBehaviour {
     void SettingPoints()
     {
         ObjectPoint = new Vector2(transform.position.x, transform.position.y + distanceFromPlayer);
-
-<<<<<<< HEAD
-        diggingObjectPointLeft = new Vector2(transform.position.x + distanceFromPlayer, transform.position.y + distanceFromPlayer);
-        diggingObjectPointRight = new Vector2(transform.position.x - distanceFromPlayer, transform.position.y + distanceFromPlayer);
-
-        diggingObjectPointHorizontal = new Vector2(transform.position.x, transform.position.y + distanceFromPlayer + 5);
-=======
-        Digging();
-
-        Debug.Log(isThrown);
->>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
     }
 
 
 
     void RaycastBottom()
     {
-        if (Input.GetKeyDown(pickAndThrowInput))
+        if (pickedUp == true)
         {
-            //  First time when spacebar is pressed
-            if (pickedUp == false) {
-                PickUpObject();
-            }
-
-            //  second time spacebar is pressed
-            else if (pickedUp == true) {
-                ShootObject();
-                isThrown = true;
-            }
+            arrow.SetActive(true);
         }
+
+
+        if (pickedUp == false && pickupInput >= 0.5f && throwInput == 0.0f)
+        {
+              PickUpObject();
+        }
+
+        //  second time spacebar is pressed
+        else if (pickedUp == true && throwInput >= 0.5f && pickupInput == 0.0f)
+        {
+            ShootObject();
+            Debug.Log("Object is being thrown");
+            isThrown = true;
+            arrow.SetActive(false);
+        }
+
     }
 
     void PickUpObject()
     {
         Vector2 raycastposition = new Vector2(transform.position.x, transform.position.y - 0.5f);
 
-        RaycastHit2D hit = Physics2D.Raycast(raycastposition, Vector2.down, rayLength);
+        RaycastHit2D hit;
 
-        Debug.DrawRay(raycastposition, Vector2.down, Color.red, 5);
-
-        if (hit.collider != null)
+        if (hit = Physics2D.Raycast(raycastposition, Vector2.down, 2.0f))
         {
-            if (hit.collider.gameObject.tag == "Dirt" || hit.collider.gameObject.tag == "Stone" || hit.collider.gameObject.tag == "Cloud")    //  it works but it hits the player first
+            if (hit.collider != null)
             {
-                GameObject other = hit.collider.gameObject;
+                Debug.Log(hit.collider.gameObject.tag);
 
-                PickedObject = other.gameObject;
+                if (hit.collider.gameObject.tag == "Dirt" || hit.collider.gameObject.tag == "Stone" || hit.collider.gameObject.tag == "Cloud")    //  it works but it hits the player first
+                {
+                    GameObject other = hit.collider.gameObject;
 
-                other.tag = "PickedUpObject";
+                    PickedObject = other.gameObject;
 
-                pickedUp = true;
+                    other.tag = "PickedUpObject";
+
+                    pickedUp = true;
+                }
             }
         }
+
+        Debug.DrawRay(raycastposition, Vector2.down, Color.red, 5);
     }
 
     void ShootObject()
     {
+        Vector2 throwInput = new Vector2(throwDirectionInputHorizontal, throwDirectionInputVertical);
+
+
         rigidbodyPickedObject = PickedObject.GetComponent<Rigidbody2D>();  // Tom already has  a rigidbody
         rigidbodyPickedObject.isKinematic = false;
 
-        rigidbodyPickedObject.AddForce(transform.right * throwForce);
+        rigidbodyPickedObject.AddForce(throwInput.normalized * throwForce);
+
+        Debug.Log("Horizontal" + throwDirectionInputHorizontal + "Vertical" + throwDirectionInputVertical);
+
         pickedUp = false;
     }
 
-    void Digging()
-    {
-<<<<<<< HEAD
-        if(Input.GetKey(KeyCode.DownArrow) && Input.GetKey(holdToDig))
-=======
-        if(Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.B))
->>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
-        {
-            Debug.Log("It is digging down");
-            DoDigging();
-        }
 
-<<<<<<< HEAD
-        if(Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(holdToDig))
-=======
-        if(Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.B))
->>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
-        {
-            DoDiggingLeft();
-        }
-
-<<<<<<< HEAD
-        if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(holdToDig))
-=======
-        if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.B))
->>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
-        {
-            DoDiggingRight();
-        }
-    }
-
-    void DoDiggingLeft()
-    {
-        // cast one raycast to the left
-        Vector2 raycastToLeft = new Vector2(transform.position.x - lenghtFromPlayerHorizontal, transform.position.y);
-        RaycastHit2D hit = Physics2D.Raycast(raycastToLeft, Vector2.left, 10);
-
-        Debug.DrawRay(raycastToLeft, Vector2.left, Color.green, 5);
-
-        if (hit.collider != null)
-        {
-<<<<<<< HEAD
-            if(hit.collider.gameObject.tag == "Stone" || hit.collider.gameObject.tag == "Dirt")
-=======
-            if(hit.collider.gameObject.tag == "Dirt" || hit.collider.gameObject.tag == "Stone")
->>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
-            {
-                // change position
-                GameObject other = hit.collider.gameObject;
-                other.transform.position = diggingObjectPointHorizontal;
-                other.GetComponent<Rigidbody2D>().AddForce(Vector2.up * throwForce);
-                other.GetComponent<Rigidbody2D>().isKinematic = false;
-            }
-        }
-    }
-
-    void DoDiggingRight()
-    {
-        //  cast one raycast to the right
-        Vector2 raycastToRight = new Vector2(transform.position.x + lenghtFromPlayerHorizontal, transform.position.y);
-        RaycastHit2D hit = Physics2D.Raycast(raycastToRight, Vector2.right, 10);
-
-        Debug.DrawRay(raycastToRight, Vector2.right, Color.green, 5);
-
-        if (hit.collider != null)
-        {
-<<<<<<< HEAD
-            if (hit.collider.gameObject.tag == "Stone" || hit.collider.gameObject.tag == "Dirt")
-=======
-            if (hit.collider.gameObject.tag == "Dirt" || hit.collider.gameObject.tag == "Stone")
->>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
-            {
-                GameObject other = hit.collider.gameObject;
-                other.transform.position = diggingObjectPointHorizontal;
-                other.GetComponent<Rigidbody2D>().AddForce(Vector2.up * throwForce);
-                other.GetComponent<Rigidbody2D>().isKinematic = false;
-            }
-        }
-    }
-
-    void DoDigging()
-    {
-        // shoots two raycast downwards and the object it hits will be positioned above the player and shoot upwards
-        Vector2 raycastPositionRight = new Vector2(transform.position.x + lengthFromPlayerDigging, transform.position.y - 0.5f);
-        Vector2 raycastPositionLeft = new Vector2(transform.position.x - lengthFromPlayerDigging, transform.position.y - 0.5f);
-
-        RaycastHit2D hitRight = Physics2D.Raycast(raycastPositionRight, Vector2.down, 40);
-        RaycastHit2D hitLeft = Physics2D.Raycast(raycastPositionLeft, Vector2.down, 40);
-
-        Debug.DrawRay(raycastPositionRight, Vector2.down, Color.yellow, 5);
-        Debug.DrawRay(raycastPositionLeft, Vector2.down, Color.yellow, 5);
-
-        // Right raycast
-        if (hitRight.collider != null)
-        {
-<<<<<<< HEAD
-            if (hitRight.collider.gameObject.tag == "Stone" || hitRight.collider.gameObject.tag == "Dirt")    //  it works but it hits the player first
-            {
-                GameObject other = hitRight.collider.gameObject;
-
-                other.transform.position = diggingObjectPointLeft; // change position
-                other.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 1);
-
-                Debug.Log("RIGHT raycast");
-=======
-            if (hitRight.collider.gameObject.tag == "Dirt" || hitRight.collider.gameObject.tag == "Stone")    //  it works but it hits the player first
-            {
-                GameObject other = hitRight.collider.gameObject;
-
-                other.transform.position = ObjectPoint; // change position
-                other.GetComponent<Rigidbody2D>().AddForce(Vector2.up * throwForce);
-                other.GetComponent<Rigidbody2D>().isKinematic = false;
->>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
-            }
-        }
-        //  Left raycast
-        if (hitLeft.collider != null)
-        {
-<<<<<<< HEAD
-            if (hitLeft.collider.gameObject.tag == "Stone" || hitLeft.collider.gameObject.tag == "Dirt")    //  it works but it hits the player first
-            {
-                GameObject other = hitRight.collider.gameObject;
-
-                other.transform.position = diggingObjectPointRight; // change position
-                other.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 1);
-
-                Debug.Log("LEFT raycast");
-=======
-            if (hitLeft.collider.gameObject.tag == "Dirt" || hitRight.collider.gameObject.tag == "Stone")    //  it works but it hits the player first
-            {
-                GameObject other = hitRight.collider.gameObject;
-
-                other.transform.position = ObjectPoint; // change position
-                other.GetComponent<Rigidbody2D>().AddForce(Vector2.up * throwForce);
-                other.GetComponent<Rigidbody2D>().isKinematic = false;
-            }
-            else
-            {
-
->>>>>>> 3a7d196622c5be25858c5e3e45cb301786f177c9
-            }
-        }
-    }
 }

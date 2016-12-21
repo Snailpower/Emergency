@@ -13,6 +13,8 @@ public class DirtStats : MonoBehaviour {
     void Start()
     {
         //playerController = GetComponent<RaycastScript>();
+
+        
     }
 
 
@@ -54,8 +56,10 @@ public class DirtStats : MonoBehaviour {
 
 	
 	// Update is called once per frame
-	void Update () {
-	    
+	void FixedUpdate () {
+
+        //gameObject.transform.position.z(transform.position.x, transform.position.y, 0.0f);
+
         if(dirtHP <= 0)
         {
             Destroy(gameObject);

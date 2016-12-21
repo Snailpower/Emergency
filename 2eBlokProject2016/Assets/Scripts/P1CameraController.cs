@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class P1CameraController : MonoBehaviour {
-
     public GameObject player1;
     public GameObject player2;
 

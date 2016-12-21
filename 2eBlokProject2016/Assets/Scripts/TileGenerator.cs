@@ -72,8 +72,6 @@ public class TileGenerator : MonoBehaviour {
         float width = renderer.bounds.size.x;
         float height = renderer.bounds.size.y;
 
-        Debug.Log(width);
-
         float xStart = 0.5f;
         float yStart = 0.5f;
 

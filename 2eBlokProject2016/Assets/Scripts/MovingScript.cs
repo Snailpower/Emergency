@@ -6,6 +6,9 @@ public class MovingScript : MonoBehaviour {
     public GameObject player;
     public bool isGrounded = false;
 
+    public Camera cameraT1;
+    public Camera cameraT2;
+
     private float PlayerSpeed = 10;
     private int jumpPower = 500;
     private bool goingRight = true;
@@ -14,50 +17,117 @@ public class MovingScript : MonoBehaviour {
     private KeyCode rightInput;
     private KeyCode jumpInput;
 
-    private string horizontalAxis;
-    private string verticalAxis;
+    private float horizontalAxis;
+    private float verticalAxis;
 
     private Rigidbody2D playerRigidbody;
 
     // Use this for initialization
     void Start () {
-        AssignRightInputToPlayer();
+        
 
         playerRigidbody = player.GetComponent<Rigidbody2D>();
-    }
-
-    void AssignRightInputToPlayer()
-    {
-        if (this.gameObject.tag == "Player")
-        {
-            leftInput = KeyCode.LeftArrow;
-            rightInput = KeyCode.RightArrow;
-            jumpInput = KeyCode.UpArrow;
-
-            horizontalAxis = "HorizontalPlayer1";
-            verticalAxis = "VerticalPlayer1";
-        }
-        else if (this.gameObject.tag == "Player2")
-        {
-            leftInput = KeyCode.A;
-            rightInput = KeyCode.D;
-            jumpInput = KeyCode.W;
-
-            horizontalAxis = "HorizontalPlayer2";
-            verticalAxis = "VerticalPlayer2";
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        PlayerMovementLeft();
-        PlayerMovementRight();
-        PlayerMovementUp();
-        RotateCharacter();
+        AssignRightInputToPlayer();
+
+        if (this.gameObject.tag == "Player" || this.gameObject.tag == "Player2")
+        {
+
+            PlayerMovementLeft();
+            PlayerMovementRight();
+            PlayerMovementUp();
+            RotateCharacter();
+
+            var posCamera1 = cameraT1.WorldToViewportPoint(transform.position);
+            if (cameraT1.enabled == true)
+            {
+
+                posCamera1.x = Mathf.Clamp(posCamera1.x, 0.0f, 1.0f);
+                posCamera1.y = Mathf.Clamp(posCamera1.y, 0.0f, 1.0f);
+                transform.position = cameraT1.ViewportToWorldPoint(posCamera1);
+            }
+        }
+        else if (this.gameObject.tag == "Player3" || this.gameObject.tag == "Player4")
+        {
+            PlayerMovementLeft();
+            PlayerMovementRight();
+            PlayerMovementUp();
+            RotateCharacter();
+
+            var posCamera2 = cameraT2.WorldToViewportPoint(transform.position);
+
+            if (cameraT2.enabled == true)
+            {
+
+                posCamera2.x = Mathf.Clamp(posCamera2.x, 0.0f, 1.0f);
+                posCamera2.y = Mathf.Clamp(posCamera2.y, 0.0f, 1.0f);
+                transform.position = cameraT2.ViewportToWorldPoint(posCamera2);
+            }
+        }
+
+        
     }
 
-    void OnCollisionEnter2D()
+    void AssignRightInputToPlayer()
+    {
+
+        if (this.gameObject.tag == "Player")
+        {
+            /*leftInput = KeyCode.LeftArrow;
+            rightInput = KeyCode.RightArrow;*/
+            jumpInput = KeyCode.Joystick1Button0;
+
+            horizontalAxis = Input.GetAxis("HorizontalPlayer1");
+            verticalAxis = Input.GetAxis("VerticalPlayer1");
+
+
+        }
+        else if (this.gameObject.tag == "Player2")
+        {
+
+            /*leftInput = KeyCode.A;
+            rightInput = KeyCode.D;*/
+            jumpInput = KeyCode.Joystick2Button0;
+
+            horizontalAxis = Input.GetAxis("HorizontalPlayer2");
+            verticalAxis = Input.GetAxis("VerticalPlayer2");
+
+
+
+        }
+        else if (this.gameObject.tag == "Player3")
+        {
+
+            /*leftInput = KeyCode.A;
+            rightInput = KeyCode.D;*/
+            jumpInput = KeyCode.Joystick3Button0;
+
+            horizontalAxis = Input.GetAxis("HorizontalPlayer3");
+            verticalAxis = Input.GetAxis("VerticalPlayer3");
+
+
+
+        }
+        else if (this.gameObject.tag == "Player4")
+        {
+
+            /*leftInput = KeyCode.A;
+            rightInput = KeyCode.D;*/
+            jumpInput = KeyCode.Joystick4Button0;
+
+            horizontalAxis = Input.GetAxis("HorizontalPlayer4");
+            verticalAxis = Input.GetAxis("VerticalPlayer4");
+
+
+
+        }
+    }
+
+        void OnCollisionEnter2D()
     {
         isGrounded = true;
     }
@@ -79,9 +149,10 @@ public class MovingScript : MonoBehaviour {
     void PlayerMovementRight()
     {
         //  makes the player able to go right
-        if (Input.GetKey(rightInput))
+        float horizontal = horizontalAxis;
+
+        if (horizontal > 0)
         {
-            float horizontal = Input.GetAxis(horizontalAxis);
             player.transform.Translate(Vector2.right * horizontal * PlayerSpeed * Time.deltaTime);
 
             goingRight = true;
@@ -91,13 +162,15 @@ public class MovingScript : MonoBehaviour {
     void PlayerMovementLeft()
     {
         // makes the player able to go left
-        if (Input.GetKey(leftInput))
+        float horizontal = horizontalAxis;
+
+        if (horizontal < 0)
         {
-            float horizontal = Input.GetAxis(horizontalAxis);
             player.transform.Translate(Vector2.left * horizontal * PlayerSpeed * Time.deltaTime);
 
             goingRight = false;
         }
+           
     }
 
     void PlayerMovementUp()

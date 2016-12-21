@@ -4,16 +4,11 @@ using System.Collections;
 public class StoneStats : MonoBehaviour {
 
     public int stoneHP = 4;
-
     public int stoneATK = 3;
-
-    private RaycastScript playerController;
-
     
     // Use this for initialization
     void Start ()
     {
-        playerController = GetComponent<RaycastScript>();
 
 	}
 

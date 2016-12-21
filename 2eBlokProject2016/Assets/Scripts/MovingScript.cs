@@ -11,14 +11,18 @@ public class MovingScript : MonoBehaviour {
 
     private float PlayerSpeed = 10;
     private int jumpPower = 500;
-    private bool goingRight = true;
+    public bool goingRight = true;
 
     private KeyCode leftInput;
     private KeyCode rightInput;
     private KeyCode jumpInput;
 
+<<<<<<< HEAD
     private float horizontalAxis;
     private float verticalAxis;
+=======
+    private string horizontalAxis;
+>>>>>>> f9b57e03ad8e9f8a26058ecba9290b042a04354c
 
     private Rigidbody2D playerRigidbody;
 
@@ -85,10 +89,15 @@ public class MovingScript : MonoBehaviour {
             verticalAxis = Input.GetAxis("VerticalPlayer1");
 
 
+<<<<<<< HEAD
+=======
+            horizontalAxis = "HorizontalPlayer1";
+>>>>>>> f9b57e03ad8e9f8a26058ecba9290b042a04354c
         }
         else if (this.gameObject.tag == "Player2")
         {
 
+<<<<<<< HEAD
             /*leftInput = KeyCode.A;
             rightInput = KeyCode.D;*/
             jumpInput = KeyCode.Joystick2Button0;
@@ -98,6 +107,9 @@ public class MovingScript : MonoBehaviour {
 
 
 
+=======
+            horizontalAxis = "HorizontalPlayer2";
+>>>>>>> f9b57e03ad8e9f8a26058ecba9290b042a04354c
         }
         else if (this.gameObject.tag == "Player3")
         {

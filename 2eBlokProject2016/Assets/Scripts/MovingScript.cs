@@ -6,8 +6,15 @@ public class MovingScript : MonoBehaviour {
     public GameObject player;
     public bool isGrounded = false;
 
+
+    private float increaserSpeed;
+    private float startSpeed = 1.0f;
+    private float addingSpeed = 0.1f;
+    private float maxSpeed = 1.5f;
+    private bool isSpeeding = false;
+
     private float PlayerSpeed = 10;
-    private int jumpPower = 500;
+    private int jumpPower = 2000;
     public bool goingRight = true;
 
     private KeyCode leftInput;
@@ -48,10 +55,42 @@ public class MovingScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (isSpeeding == true)
+        {
+            increaserSpeed += addingSpeed;
+        }   else if (isSpeeding == false)
+        {
+            increaserSpeed = startSpeed;
+        }
+
+        if(playerRigidbody.velocity.x > -0.1f && playerRigidbody.velocity.x < 0.1f)
+        {
+            isSpeeding = false;
+        }
+
+        if( increaserSpeed > maxSpeed)
+        {
+            increaserSpeed = maxSpeed;
+        }
+
         PlayerMovementLeft();
         PlayerMovementRight();
         PlayerMovementUp();
         RotateCharacter();
+    }
+
+    void FixedUpdate()
+    {
+        /*
+        Vector3 easeVelocity = playerRigidbody.velocity;
+
+        easeVelocity.y = playerRigidbody.velocity.y;
+        easeVelocity.z = 0.0f;
+        easeVelocity.x *= 10;
+
+        // fakes friction - most noticable by start walking
+        playerRigidbody.velocity = easeVelocity;
+        */
     }
 
     void OnCollisionEnter2D()
@@ -79,9 +118,10 @@ public class MovingScript : MonoBehaviour {
         if (Input.GetKey(rightInput))
         {
             float horizontal = Input.GetAxis(horizontalAxis);
-            player.transform.Translate(Vector2.right * horizontal * PlayerSpeed * Time.deltaTime);
+            player.transform.Translate(Vector2.right * horizontal * PlayerSpeed * Time.deltaTime * increaserSpeed);
 
             goingRight = true;
+            isSpeeding = true;
         }
     }
 
@@ -91,9 +131,10 @@ public class MovingScript : MonoBehaviour {
         if (Input.GetKey(leftInput))
         {
             float horizontal = Input.GetAxis(horizontalAxis);
-            player.transform.Translate(Vector2.left * horizontal * PlayerSpeed * Time.deltaTime);
+            player.transform.Translate(Vector2.left * horizontal * PlayerSpeed * Time.deltaTime * increaserSpeed);
 
             goingRight = false;
+            isSpeeding = true;
         }
     }
 

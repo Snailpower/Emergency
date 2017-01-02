@@ -22,9 +22,12 @@ public class MovingScript : MonoBehaviour {
 
     private Rigidbody2D playerRigidbody;
 
+    private Animator playerAnimator;
+
     // Use this for initialization
     void Start () {
-        
+
+        playerAnimator = GetComponent<Animator>();
 
         playerRigidbody = player.GetComponent<Rigidbody2D>();
     }
@@ -151,7 +154,13 @@ public class MovingScript : MonoBehaviour {
         {
             player.transform.Translate(Vector2.right * horizontal * PlayerSpeed * Time.deltaTime);
 
+            playerAnimator.SetBool("IsWalking", true);
+
             goingRight = true;
+        }
+        else if (horizontal == 0)
+        {
+            playerAnimator.SetBool("IsWalking", false);
         }
     }
 
@@ -164,9 +173,15 @@ public class MovingScript : MonoBehaviour {
         {
             player.transform.Translate(Vector2.left * horizontal * PlayerSpeed * Time.deltaTime);
 
+            playerAnimator.SetBool("IsWalking", true);
+
             goingRight = false;
         }
-           
+        else if (horizontal == 0)
+        {
+            playerAnimator.SetBool("IsWalking", false);
+        }
+
     }
 
     void PlayerMovementUp()

@@ -18,11 +18,13 @@ public class DirtStats : MonoBehaviour {
     }
 
 
+
     void OnCollisionEnter2D(Collision2D other)
     {
         DirtStats otherDirtValues = other.gameObject.GetComponent<DirtStats>();
         CloudStats otherCloudValues = other.gameObject.GetComponent<CloudStats>();
         StoneStats otherStoneValues = other.gameObject.GetComponent<StoneStats>();
+        TreeStats otherTreeValues = other.gameObject.GetComponent<TreeStats>();
         
         if (RaycastScript.isThrown == true && gameObject.tag == "PickedUpObject")
             {
@@ -45,6 +47,14 @@ public class DirtStats : MonoBehaviour {
             if (other.gameObject.tag == "Cloud")
             {
                 otherCloudValues.cloudHP -= dirtATK;
+
+                gameObject.tag = "Dirt";
+                RaycastScript.isThrown = false;
+            }
+
+            if (other.gameObject.tag == "Tree")
+            {
+                otherTreeValues.treeHP -= dirtATK;
 
                 gameObject.tag = "Dirt";
                 RaycastScript.isThrown = false;

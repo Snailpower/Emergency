@@ -6,8 +6,15 @@ public class MovingScript : MonoBehaviour {
     public GameObject player;
     public bool isGrounded = false;
 
+    private float increaserSpeed;
+    private float startSpeed = 1.0f;
+    private float addingSpeed = 0.1f;
+    private float maxSpeed = 1.5f;
+    private bool isSpeeding = false;
+
     public Camera cameraT1;
     public Camera cameraT2;
+
 
     private float PlayerSpeed = 10;
     private int jumpPower = 500;
@@ -72,7 +79,25 @@ public class MovingScript : MonoBehaviour {
             }
         }
 
-        
+        if (isSpeeding == true)
+        {
+            increaserSpeed += addingSpeed;
+        }
+        else if (isSpeeding == false)
+        {
+            increaserSpeed = startSpeed;
+        }
+
+        if (playerRigidbody.velocity.x > -0.1f && playerRigidbody.velocity.x < 0.1f)
+        {
+            isSpeeding = false;
+        }
+
+        if (increaserSpeed > maxSpeed)
+        {
+            increaserSpeed = maxSpeed;
+        }
+
     }
 
     void AssignRightInputToPlayer()
@@ -100,34 +125,38 @@ public class MovingScript : MonoBehaviour {
         }
         else if (this.gameObject.tag == "Player3")
         {
-
-            /*leftInput = KeyCode.A;
-            rightInput = KeyCode.D;*/
             jumpInput = KeyCode.Joystick3Button0;
 
             horizontalAxis = Input.GetAxis("HorizontalPlayer3");
             verticalAxis = Input.GetAxis("VerticalPlayer3");
-
-
-
         }
         else if (this.gameObject.tag == "Player4")
         {
-
-            /*leftInput = KeyCode.A;
-            rightInput = KeyCode.D;*/
             jumpInput = KeyCode.Joystick4Button0;
 
             horizontalAxis = Input.GetAxis("HorizontalPlayer4");
             verticalAxis = Input.GetAxis("VerticalPlayer4");
-
-
-
         }
     }
 
-        void OnCollisionEnter2D()
+    void FixedUpdate()
     {
+        /*
+        Vector3 easeVelocity = playerRigidbody.velocity;
+
+        easeVelocity.y = playerRigidbody.velocity.y;
+        easeVelocity.z = 0.0f;
+        easeVelocity.x *= 10;
+
+        // fakes friction - most noticable by start walking
+        playerRigidbody.velocity = easeVelocity;
+        */
+    }
+
+    void OnCollisionEnter2D()
+    { 
+            /*leftInput = KeyCode.A;
+            rightInput = KeyCode.D;*/
         isGrounded = true;
     }
 
@@ -152,11 +181,12 @@ public class MovingScript : MonoBehaviour {
 
         if (horizontal > 0)
         {
-            player.transform.Translate(Vector2.right * horizontal * PlayerSpeed * Time.deltaTime);
+            player.transform.Translate(Vector2.right * horizontal * PlayerSpeed * Time.deltaTime * increaserSpeed);
 
             playerAnimator.SetBool("IsWalking", true);
 
             goingRight = true;
+            isSpeeding = true;
         }
         else if (horizontal == 0)
         {
@@ -171,11 +201,13 @@ public class MovingScript : MonoBehaviour {
 
         if (horizontal < 0)
         {
-            player.transform.Translate(Vector2.left * horizontal * PlayerSpeed * Time.deltaTime);
+            player.transform.Translate(Vector2.left * horizontal * PlayerSpeed * Time.deltaTime * increaserSpeed);
+
 
             playerAnimator.SetBool("IsWalking", true);
 
             goingRight = false;
+            isSpeeding = true;
         }
         else if (horizontal == 0)
         {

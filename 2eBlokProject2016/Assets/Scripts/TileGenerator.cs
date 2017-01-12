@@ -13,6 +13,9 @@ public class TileGenerator : MonoBehaviour {
 
     public GameObject backgroundTileStorage;
     public GameObject levelBlockStorage;
+    public GameObject treeStorage;
+
+    public GameObject treePrefab;
 
     public float stoneMin;
     public float stoneMax;
@@ -63,11 +66,10 @@ public class TileGenerator : MonoBehaviour {
         }
     }
 
-
     void GroundPatternGeneration()
     {
 
-        var renderer = dirtBGPrefab.GetComponent<Renderer>();
+        var renderer = dirtBlockPrefab.GetComponent<Renderer>();
 
         float width = renderer.bounds.size.x;
         float height = renderer.bounds.size.y;

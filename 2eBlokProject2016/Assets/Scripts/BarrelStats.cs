@@ -1,0 +1,43 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class BarrelStats : MonoBehaviour {
+
+    public int barrelHP = 2;
+    public static bool exploded = false;
+
+    void Start()
+    {
+
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        DirtStats otherDirtValues = other.gameObject.GetComponent<DirtStats>();
+        CloudStats otherCloudValues = other.gameObject.GetComponent<CloudStats>();
+        StoneStats otherStoneValues = other.gameObject.GetComponent<StoneStats>();
+
+        if (RaycastScript.isThrown == true && gameObject.tag == "PickedUpObject")
+        {
+            barrelHP -= 2;
+        }
+
+
+    }
+
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        //gameObject.transform.position.z(transform.position.x, transform.position.y, 0.0f);
+
+
+
+        if (barrelHP <= 0)
+        {
+            exploded = true;
+        }
+
+    }
+}

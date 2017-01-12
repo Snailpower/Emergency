@@ -4,7 +4,7 @@ using System.Collections;
 public class BarrelStats : MonoBehaviour {
 
     public int barrelHP = 2;
-    public static bool exploded = false;
+    public bool exploded = false;
 
     void Start()
     {
@@ -19,7 +19,7 @@ public class BarrelStats : MonoBehaviour {
 
         if (RaycastScript.isThrown == true && gameObject.tag == "PickedUpObject")
         {
-            barrelHP -= 2;
+            gameObject.GetComponent<BarrelStats>().barrelHP -= 2;
         }
 
 

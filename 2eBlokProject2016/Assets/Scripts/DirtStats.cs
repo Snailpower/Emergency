@@ -25,7 +25,8 @@ public class DirtStats : MonoBehaviour {
         CloudStats otherCloudValues = other.gameObject.GetComponent<CloudStats>();
         StoneStats otherStoneValues = other.gameObject.GetComponent<StoneStats>();
         TreeStats otherTreeValues = other.gameObject.GetComponent<TreeStats>();
-        
+        PlayerStats otherPlayerValues = other.gameObject.GetComponent<PlayerStats>();
+
         if (RaycastScript.isThrown == true && gameObject.tag == "PickedUpObject")
             {
             if (other.gameObject.tag == "Dirt")
@@ -62,24 +63,32 @@ public class DirtStats : MonoBehaviour {
 
             if (other.gameObject.tag == "Player")
             {
+                otherPlayerValues.playerHP -= dirtATK;
+
                 gameObject.tag = "Dirt";
                 RaycastScript.isThrown = false;
             }
 
             if (other.gameObject.tag == "Player2")
             {
+                otherPlayerValues.playerHP -= dirtATK;
+
                 gameObject.tag = "Dirt";
                 RaycastScript.isThrown = false;
             }
 
             if (other.gameObject.tag == "Player3")
             {
+                otherPlayerValues.playerHP -= dirtATK;
+
                 gameObject.tag = "Dirt";
                 RaycastScript.isThrown = false;
             }
 
             if (other.gameObject.tag == "Player4")
             {
+                otherPlayerValues.playerHP -= dirtATK;
+
                 gameObject.tag = "Dirt";
                 RaycastScript.isThrown = false;
             }

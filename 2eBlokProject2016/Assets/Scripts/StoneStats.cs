@@ -18,6 +18,7 @@ public class StoneStats : MonoBehaviour {
         CloudStats otherCloudValues = other.gameObject.GetComponent<CloudStats>();
         StoneStats otherStoneValues = other.gameObject.GetComponent<StoneStats>();
         TreeStats otherTreeValues = other.gameObject.GetComponent<TreeStats>();
+        PlayerStats otherPlayerValues = other.gameObject.GetComponent<PlayerStats>();
 
         if (RaycastScript.isThrown == true && gameObject.tag == "PickedUpObject")
         {
@@ -55,24 +56,32 @@ public class StoneStats : MonoBehaviour {
 
             if (other.gameObject.tag == "Player")
             {
+                otherPlayerValues.playerHP -= stoneATK;
+
                 gameObject.tag = "Stone";
                 RaycastScript.isThrown = false;
             }
 
             if (other.gameObject.tag == "Player2")
             {
+                otherPlayerValues.playerHP -= stoneATK;
+
                 gameObject.tag = "Stone";
                 RaycastScript.isThrown = false;
             }
 
             if (other.gameObject.tag == "Player3")
             {
+                otherPlayerValues.playerHP -= stoneATK;
+
                 gameObject.tag = "Stone";
                 RaycastScript.isThrown = false;
             }
 
             if (other.gameObject.tag == "Player4")
             {
+                otherPlayerValues.playerHP -= stoneATK;
+
                 gameObject.tag = "Stone";
                 RaycastScript.isThrown = false;
             }

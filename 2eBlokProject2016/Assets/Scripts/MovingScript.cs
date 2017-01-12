@@ -6,11 +6,20 @@ public class MovingScript : MonoBehaviour {
     public GameObject player;
     public bool isGrounded = false;
 
+<<<<<<< HEAD
+
+    private float increaserSpeed;
+    private float startSpeed = 1.0f;
+    private float addingSpeed = 0.1f;
+    private float maxSpeed = 1.5f;
+    private bool isSpeeding = false;
+=======
     public Camera cameraT1;
     public Camera cameraT2;
+>>>>>>> 8240fbdac91b1171382f184e29819f5a473cad7c
 
     private float PlayerSpeed = 10;
-    private int jumpPower = 500;
+    private int jumpPower = 2000;
     public bool goingRight = true;
 
     private KeyCode leftInput;
@@ -101,6 +110,50 @@ public class MovingScript : MonoBehaviour {
         else if (this.gameObject.tag == "Player3")
         {
 
+<<<<<<< HEAD
+    // Update is called once per frame
+    void Update()
+    {
+        if (isSpeeding == true)
+        {
+            increaserSpeed += addingSpeed;
+        }   else if (isSpeeding == false)
+        {
+            increaserSpeed = startSpeed;
+        }
+
+        if(playerRigidbody.velocity.x > -0.1f && playerRigidbody.velocity.x < 0.1f)
+        {
+            isSpeeding = false;
+        }
+
+        if( increaserSpeed > maxSpeed)
+        {
+            increaserSpeed = maxSpeed;
+        }
+
+        PlayerMovementLeft();
+        PlayerMovementRight();
+        PlayerMovementUp();
+        RotateCharacter();
+    }
+
+    void FixedUpdate()
+    {
+        /*
+        Vector3 easeVelocity = playerRigidbody.velocity;
+
+        easeVelocity.y = playerRigidbody.velocity.y;
+        easeVelocity.z = 0.0f;
+        easeVelocity.x *= 10;
+
+        // fakes friction - most noticable by start walking
+        playerRigidbody.velocity = easeVelocity;
+        */
+    }
+
+    void OnCollisionEnter2D()
+=======
             /*leftInput = KeyCode.A;
             rightInput = KeyCode.D;*/
             jumpInput = KeyCode.Joystick3Button0;
@@ -127,6 +180,7 @@ public class MovingScript : MonoBehaviour {
     }
 
         void OnCollisionEnter2D()
+>>>>>>> 8240fbdac91b1171382f184e29819f5a473cad7c
     {
         isGrounded = true;
     }
@@ -152,11 +206,17 @@ public class MovingScript : MonoBehaviour {
 
         if (horizontal > 0)
         {
+<<<<<<< HEAD
+            float horizontal = Input.GetAxis(horizontalAxis);
+            player.transform.Translate(Vector2.right * horizontal * PlayerSpeed * Time.deltaTime * increaserSpeed);
+=======
             player.transform.Translate(Vector2.right * horizontal * PlayerSpeed * Time.deltaTime);
+>>>>>>> 8240fbdac91b1171382f184e29819f5a473cad7c
 
             playerAnimator.SetBool("IsWalking", true);
 
             goingRight = true;
+            isSpeeding = true;
         }
         else if (horizontal == 0)
         {
@@ -171,11 +231,17 @@ public class MovingScript : MonoBehaviour {
 
         if (horizontal < 0)
         {
+<<<<<<< HEAD
+            float horizontal = Input.GetAxis(horizontalAxis);
+            player.transform.Translate(Vector2.left * horizontal * PlayerSpeed * Time.deltaTime * increaserSpeed);
+=======
             player.transform.Translate(Vector2.left * horizontal * PlayerSpeed * Time.deltaTime);
+>>>>>>> 8240fbdac91b1171382f184e29819f5a473cad7c
 
             playerAnimator.SetBool("IsWalking", true);
 
             goingRight = false;
+            isSpeeding = true;
         }
         else if (horizontal == 0)
         {

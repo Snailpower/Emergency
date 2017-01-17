@@ -212,7 +212,8 @@ public class RaycastScript : MonoBehaviour {
             if (isGrounded && (hit.collider.gameObject.tag == "Dirt" || 
                     hit.collider.gameObject.tag == "Stone" ||
                     hit.collider.gameObject.tag == "Cloud" ||
-                    hit.collider.gameObject.tag == "Barrel"))    //  it works but it hits the player first
+                    hit.collider.gameObject.tag == "Barrel"||
+                    hit.collider.gameObject.tag == "Wood"))    //  it works but it hits the player first
             {
                 GameObject other = hit.collider.gameObject;
                 PickedObject = other.gameObject;

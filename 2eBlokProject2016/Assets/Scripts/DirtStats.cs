@@ -61,6 +61,14 @@ public class DirtStats : MonoBehaviour {
                 RaycastScript.isThrown = false;
             }
 
+            if (other.gameObject.tag == "Wood")
+            {
+                otherTreeValues.treeHP -= dirtATK;
+
+                gameObject.tag = "Dirt";
+                RaycastScript.isThrown = false;
+            }
+
             if (other.gameObject.tag == "Player")
             {
                 otherPlayerValues.playerHP -= dirtATK;

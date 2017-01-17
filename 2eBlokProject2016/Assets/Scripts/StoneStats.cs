@@ -54,6 +54,14 @@ public class StoneStats : MonoBehaviour {
                 RaycastScript.isThrown = false;
             }
 
+            if (other.gameObject.tag == "Wood")
+            {
+                otherTreeValues.treeHP -= stoneATK;
+
+                gameObject.tag = "Dirt";
+                RaycastScript.isThrown = false;
+            }
+
             if (other.gameObject.tag == "Player")
             {
                 otherPlayerValues.playerHP -= stoneATK;

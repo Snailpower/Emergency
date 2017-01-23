@@ -17,7 +17,22 @@ ExportedObj/
 *.pidb
 *.booproj
 *.svd
-*.dll
+
+
+*.Advertisements.dll
+*.Analytics.dll
+*.EditorTestsRunner.dll
+*.Graphs.dll
+*.Graps.xml
+*.HoloLens.dll
+*.Networking.dll
+*.PlaymodeTestsRunner.dll
+*.TreeEditor
+*.UI.dll
+*.VR.dll
+*.WindowsStandalone.Extensions.dll
+*.Purchasing.xml
+
 *.asset
 *.dwlt
 

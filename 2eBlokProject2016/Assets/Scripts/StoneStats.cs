@@ -20,7 +20,7 @@ public class StoneStats : MonoBehaviour {
         TreeStats otherTreeValues = other.gameObject.GetComponent<TreeStats>();
         PlayerStats otherPlayerValues = other.gameObject.GetComponent<PlayerStats>();
 
-        if (RaycastScript.isThrown == true && gameObject.tag == "PickedUpObject")
+        if (gameObject.tag == "PickedUpObject")
         {
             if (other.gameObject.tag == "Dirt")
             {

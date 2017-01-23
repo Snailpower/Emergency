@@ -94,7 +94,7 @@ public class RaycastScript : MonoBehaviour {
         RotateRaycastPlacement();
         PickAndAddGameObject();
 
-        
+        Debug.Log(isThrown);
     }
 
     private void GetAxis()
@@ -307,7 +307,7 @@ public class RaycastScript : MonoBehaviour {
                 
                     pickedUp = false;   // without it the player can't pick up anything 
                     rigidbodyObjectInHand = ObjectInHand.GetComponent<Rigidbody2D>();
-                    rigidbodyObjectInHand.isKinematic = false;
+                    rigidbodyObjectInHand.isKinematic = true;
 
                     // check tag and change the tag back to its original
                     ObjectInHand.tag = originalTag;

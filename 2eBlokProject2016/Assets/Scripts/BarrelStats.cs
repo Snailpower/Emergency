@@ -17,7 +17,7 @@ public class BarrelStats : MonoBehaviour {
         CloudStats otherCloudValues = other.gameObject.GetComponent<CloudStats>();
         StoneStats otherStoneValues = other.gameObject.GetComponent<StoneStats>();
 
-        if (RaycastScript.isThrown == true && gameObject.tag == "PickedUpObject")
+        if (gameObject.tag == "PickedUpObject")
         {
             gameObject.GetComponent<BarrelStats>().barrelHP -= 2;
         }

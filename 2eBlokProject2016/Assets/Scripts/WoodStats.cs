@@ -21,7 +21,7 @@ public class WoodStats : MonoBehaviour {
         WoodStats otherWoodValues = other.gameObject.GetComponent<WoodStats>();
         PlayerStats otherPlayerValues = other.gameObject.GetComponent<PlayerStats>();
 
-        if (RaycastScript.isThrown == true && gameObject.tag == "PickedUpObject")
+        if (gameObject.tag == "PickedUpObject")
         {
             if (other.gameObject.tag == "Dirt")
             {

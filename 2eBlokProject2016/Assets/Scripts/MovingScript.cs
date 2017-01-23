@@ -16,7 +16,7 @@ public class MovingScript : MonoBehaviour {
     public Camera cameraT2;
     
     private float PlayerSpeed = 10;
-    private int jumpPower = 500;
+    private int jumpPower = 1500;
     public bool goingRight = true;
 
     private KeyCode leftInput;

@@ -72,6 +72,7 @@ public class RaycastScript : MonoBehaviour {
 
         arrow = gameObject.transform.GetChild(0).gameObject;
         child = gameObject.transform.GetChild(1).gameObject;
+        child.SetActive(false);
         ObjectInHand = gameObject.transform.FindChild("ObjectInHand").gameObject;
 
         childrenList = new List<GameObject>();
@@ -242,7 +243,7 @@ public class RaycastScript : MonoBehaviour {
 
         rigidbodyObjectInHand = null;
         pickedUp = false;
-        raycastIncrement = 0;
+        raycastIncrement = 1;
 
         // looping through the children of the object
         foreach (GameObject child in childrenList)

@@ -42,13 +42,18 @@ public class TreeStats : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        
 
         //gameObject.transform.position.z(transform.position.x, transform.position.y, 0.0f);
 
         if (treeHP <= 0)
         {
+            
+
             rigidbodyComponent.isKinematic = false;
 
+
+            
 
             rootActive = false;
 
@@ -58,7 +63,9 @@ public class TreeStats : MonoBehaviour {
             Instantiate(woodBlock, gameObject.transform.position + new Vector3(0, 7, 0.5f), Quaternion.identity, blocks.transform);
             Instantiate(woodBlock, gameObject.transform.position + new Vector3(0, 9, 0.5f), Quaternion.identity, blocks.transform);
 
+            
             gameObject.SetActive(false);
+            
             
         }
 

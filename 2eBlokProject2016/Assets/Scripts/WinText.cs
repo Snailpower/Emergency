@@ -4,24 +4,43 @@ using System.Collections;
 
 public class WinText : MonoBehaviour {
 
-    GameController gameController;
+    private Canvas canvas;
+
+    [SerializeField]
+    private GameObject text;
+
+    [SerializeField]
+    private GameObject gameController;
+
+    GameController gameControllerScript;
 
     Text winText;
 
 	// Use this for initialization
 	void Start () {
-        gameController = GetComponent<GameController>();
-        winText = GetComponent<Text>();
+        gameControllerScript = gameController.GetComponent<GameController>();
+        winText = text.GetComponent<Text>();
+
+        canvas = gameObject.GetComponent<Canvas>();
+
+        canvas.enabled = false;
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (gameController.team1Win == true)
+        if (gameControllerScript.gameOver == true)
+        {
+            canvas.enabled = true;
+
+            Debug.Log("Game Over");
+        }
+
+        if (gameControllerScript.team1Win == true)
         {
             winText.text = "Team 1 Wins!";
         }
-        else if (gameController.team2Win == true)
+        else if (gameControllerScript.team2Win == true)
         {
             winText.text = "Team 2 Wins!";
         }

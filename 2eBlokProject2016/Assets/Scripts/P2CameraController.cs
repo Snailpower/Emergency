@@ -9,6 +9,9 @@ public class P2CameraController : MonoBehaviour {
     [SerializeField]
     private int cameraYOffset = 0;
 
+    [SerializeField]
+    private int cameraZOffset = -20;
+
     // Use this for initialization
     void Start () {
 	
@@ -16,6 +19,6 @@ public class P2CameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        gameObject.transform.position = new Vector3(((player1.transform.position.x + player2.transform.position.x) / 2), (((player1.transform.position.y + player2.transform.position.y) / 2) + cameraYOffset), -10);
+        gameObject.transform.position = new Vector3(((player1.transform.position.x + player2.transform.position.x) / 2), (((player1.transform.position.y + player2.transform.position.y) / 2) + cameraYOffset), cameraZOffset);
     }
 }

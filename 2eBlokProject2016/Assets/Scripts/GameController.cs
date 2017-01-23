@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour {
 
     PlayerStats playerStats;
 
+    public bool gameOver = false;
+
     public bool player1Active = true;
     public bool player2Active = true;
     public bool player3Active = true;
@@ -25,13 +27,13 @@ public class GameController : MonoBehaviour {
     {
         if (player1Active == false && player2Active == false)
         {
-            SceneManager.LoadScene("EndScene");
             team2Win = true;
+            gameOver = true;
         }
         else if (player3Active == false && player4Active == false)
         {
-            SceneManager.LoadScene("EndScene");
             team1Win = true;
+            gameOver = true;
         }
 	}
 }

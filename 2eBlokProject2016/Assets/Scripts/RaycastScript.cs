@@ -253,8 +253,6 @@ public class RaycastScript : MonoBehaviour {
 
         rigidbodyPickedObject.AddForce(throwInput.normalized * throwForce);
 
-        Debug.Log("Horizontal" + throwDirectionInputHorizontal + "Vertical" + throwDirectionInputVertical);
-
         rigidbodyPickedObject = null;
         pickedUp = false;
     }

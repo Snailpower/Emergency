@@ -115,6 +115,7 @@ public class RaycastScript : MonoBehaviour {
             throwDirectionInputHorizontal = Input.GetAxis("Horizontal2Player2");
             throwDirectionInputVertical = Input.GetAxis("Vertical2Player2");
             LB_Button = KeyCode.Joystick2Button4;
+            RB_Button = KeyCode.Joystick2Button5;
         }
         else if (this.gameObject.tag == "Player3")
         {
@@ -123,6 +124,7 @@ public class RaycastScript : MonoBehaviour {
             throwDirectionInputHorizontal = Input.GetAxis("Horizontal2Player3");
             throwDirectionInputVertical = Input.GetAxis("Vertical2Player3");
             LB_Button = KeyCode.Joystick3Button4;
+            RB_Button = KeyCode.Joystick3Button5;
         }
         else if (this.gameObject.tag == "Player4")
         {
@@ -131,6 +133,7 @@ public class RaycastScript : MonoBehaviour {
             throwDirectionInputHorizontal = Input.GetAxis("Horizontal2Player4");
             throwDirectionInputVertical = Input.GetAxis("Vertical2Player4");
             LB_Button = KeyCode.Joystick4Button4;
+            RB_Button = KeyCode.Joystick4Button5;
         }
 
     }
@@ -201,6 +204,7 @@ public class RaycastScript : MonoBehaviour {
             if (isGrounded && (hit.collider.gameObject.tag == "Dirt" || 
                     hit.collider.gameObject.tag == "Stone" ||
                     hit.collider.gameObject.tag == "Cloud" ||
+                    hit.collider.gameObject.tag == "Wood"  ||
                     hit.collider.gameObject.tag == "Barrel"))    //  it works but it hits the player first
             {
                 GameObject other = hit.collider.gameObject;

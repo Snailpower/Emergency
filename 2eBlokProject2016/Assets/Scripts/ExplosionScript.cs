@@ -113,22 +113,22 @@ public class ExplosionScript : MonoBehaviour {
 
             if (col.gameObject.tag == "Player")
             {
-                otherPlayerValues.playerHP -= barrelATK;
+                otherPlayerValues.TakeDamage(barrelATK);
             }
 
             if (col.gameObject.tag == "Player2")
             {
-                otherPlayerValues.playerHP -= barrelATK;
+                otherPlayerValues.TakeDamage(barrelATK);
             }
 
             if (col.gameObject.tag == "Player3")
             {
-                otherPlayerValues.playerHP -= barrelATK;
+                otherPlayerValues.TakeDamage(barrelATK);
             }
 
             if (col.gameObject.tag == "Player4")
             {
-                otherPlayerValues.playerHP -= barrelATK;
+                otherPlayerValues.TakeDamage(barrelATK);
             }
         }
     }

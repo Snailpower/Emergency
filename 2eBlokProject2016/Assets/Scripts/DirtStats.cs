@@ -71,7 +71,7 @@ public class DirtStats : MonoBehaviour {
 
             if (other.gameObject.tag == "Player")
             {
-                otherPlayerValues.playerHP -= dirtATK;
+                otherPlayerValues.TakeDamage(dirtATK);
 
                 gameObject.tag = "Dirt";
                 RaycastScript.isThrown = false;
@@ -79,7 +79,7 @@ public class DirtStats : MonoBehaviour {
 
             if (other.gameObject.tag == "Player2")
             {
-                otherPlayerValues.playerHP -= dirtATK;
+                otherPlayerValues.TakeDamage(dirtATK);
 
                 gameObject.tag = "Dirt";
                 RaycastScript.isThrown = false;
@@ -87,7 +87,7 @@ public class DirtStats : MonoBehaviour {
 
             if (other.gameObject.tag == "Player3")
             {
-                otherPlayerValues.playerHP -= dirtATK;
+                otherPlayerValues.TakeDamage(dirtATK);
 
                 gameObject.tag = "Dirt";
                 RaycastScript.isThrown = false;
@@ -95,7 +95,7 @@ public class DirtStats : MonoBehaviour {
 
             if (other.gameObject.tag == "Player4")
             {
-                otherPlayerValues.playerHP -= dirtATK;
+                otherPlayerValues.TakeDamage(dirtATK);
 
                 gameObject.tag = "Dirt";
                 RaycastScript.isThrown = false;

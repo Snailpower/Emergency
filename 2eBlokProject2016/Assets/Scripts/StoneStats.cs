@@ -64,7 +64,7 @@ public class StoneStats : MonoBehaviour {
 
             if (other.gameObject.tag == "Player")
             {
-                otherPlayerValues.playerHP -= stoneATK;
+                otherPlayerValues.TakeDamage(stoneATK);
 
                 gameObject.tag = "Stone";
                 RaycastScript.isThrown = false;
@@ -72,7 +72,7 @@ public class StoneStats : MonoBehaviour {
 
             if (other.gameObject.tag == "Player2")
             {
-                otherPlayerValues.playerHP -= stoneATK;
+                otherPlayerValues.TakeDamage(stoneATK);
 
                 gameObject.tag = "Stone";
                 RaycastScript.isThrown = false;
@@ -80,7 +80,7 @@ public class StoneStats : MonoBehaviour {
 
             if (other.gameObject.tag == "Player3")
             {
-                otherPlayerValues.playerHP -= stoneATK;
+                otherPlayerValues.TakeDamage(stoneATK);
 
                 gameObject.tag = "Stone";
                 RaycastScript.isThrown = false;
@@ -88,7 +88,7 @@ public class StoneStats : MonoBehaviour {
 
             if (other.gameObject.tag == "Player4")
             {
-                otherPlayerValues.playerHP -= stoneATK;
+                otherPlayerValues.TakeDamage(stoneATK);
 
                 gameObject.tag = "Stone";
                 RaycastScript.isThrown = false;

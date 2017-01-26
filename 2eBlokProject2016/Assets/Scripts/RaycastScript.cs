@@ -17,7 +17,12 @@ public class RaycastScript : MonoBehaviour {
 
     private Transform aimingArrowTransform;
 
-    private Vector2 ObjectPoint;    // the point where the picked-up block goes to
+    private Vector2 ObjectPointP1;    // the point where the picked-up block goes to
+    private Vector2 ObjectPointP2;
+    private Vector2 ObjectPointP3;
+    private Vector2 ObjectPointP4;
+
+    private Vector2 objectInHandPosition;
 
     private Vector2 putDownPoint;   // the point before the player where the block can be putt down
     private Vector2 raycastposition;    //  the position from where the ray is cast
@@ -93,8 +98,6 @@ public class RaycastScript : MonoBehaviour {
         CheckPickedUp();
         RotateRaycastPlacement();
         PickAndAddGameObject();
-
-        Debug.Log(isThrown);
     }
 
     private void GetAxis()
@@ -142,34 +145,58 @@ public class RaycastScript : MonoBehaviour {
     {
         if (pickedUp == true && this.gameObject.tag == "Player")
         {
-            ObjectInHand.transform.position = ObjectPoint;
+            ObjectInHand.transform.position = ObjectPointP1;
         }
         else if (pickedUp == true && this.gameObject.tag == "Player2")
         {
-            ObjectInHand.transform.position = ObjectPoint;
+            ObjectInHand.transform.position = ObjectPointP2;
         }
         else if (pickedUp == true && this.gameObject.tag == "Player3")
         {
-            ObjectInHand.transform.position = ObjectPoint;
+            ObjectInHand.transform.position = ObjectPointP3;
         }
         else if (pickedUp == true && this.gameObject.tag == "Player4")
         {
-            ObjectInHand.transform.position = ObjectPoint;
+            ObjectInHand.transform.position = ObjectPointP4;
         }
     }
     
     void SettingPoints()
     {
-        ObjectPoint = new Vector2(transform.position.x, transform.position.y + distanceFromPlayer);
+        ObjectPointP1 = new Vector2(transform.position.x, transform.position.y + distanceFromPlayer);
+        ObjectPointP2 = new Vector2(transform.position.x, transform.position.y + distanceFromPlayer);
+        ObjectPointP3 = new Vector2(transform.position.x, transform.position.y + distanceFromPlayer);
+        ObjectPointP4 = new Vector2(transform.position.x, transform.position.y + distanceFromPlayer);
 
-        addedObjectPosition_1 = new Vector2(ObjectInHand.transform.position.x, ObjectInHand.transform.position.y - 1);  //  right under the parent
-        addedObjectPosition_2 = new Vector2(ObjectInHand.transform.position.x -1, ObjectInHand.transform.position.y - 1);  // bottom left of the parent
-        addedObjectPosition_3 = new Vector2(ObjectInHand.transform.position.x + 1, ObjectInHand.transform.position.y - 1);  //  bottom right of the parent
-        addedObjectPosition_4 = new Vector2(ObjectInHand.transform.position.x -1, ObjectInHand.transform.position.y);  //  left of the parent
-        addedObjectPosition_5 = new Vector2(ObjectInHand.transform.position.x + 1, ObjectInHand.transform.position.y);  //  right of the parent
-        addedObjectPosition_6 = new Vector2(ObjectInHand.transform.position.x, ObjectInHand.transform.position.y + 1);  //  top of the parent
-        addedObjectPosition_7 = new Vector2(ObjectInHand.transform.position.x - 1, ObjectInHand.transform.position.y + 1);  //  top left of the parent
-        addedObjectPosition_8 = new Vector2(ObjectInHand.transform.position.x + 1, ObjectInHand.transform.position.y +1);  //  top right of the parent
+        if (pickedUp == true && this.gameObject.tag == "Player")
+        {
+            objectInHandPosition = ObjectPointP1;
+        }
+        else if (pickedUp == true && this.gameObject.tag == "Player2")
+        {
+            objectInHandPosition = ObjectPointP2;
+        }
+        else if (pickedUp == true && this.gameObject.tag == "Player3")
+        {
+            objectInHandPosition = ObjectPointP3;
+        }
+        else if (pickedUp == true && this.gameObject.tag == "Player4")
+        {
+            objectInHandPosition = ObjectPointP4;
+        }
+        
+
+        if ((ObjectPointP1 == objectInHandPosition) || (ObjectPointP2 == objectInHandPosition) || (ObjectPointP3 == objectInHandPosition) || (ObjectPointP4 == objectInHandPosition))
+        {
+            addedObjectPosition_1 = new Vector2(ObjectInHand.transform.position.x, ObjectInHand.transform.position.y - 1);  //  right under the parent
+            addedObjectPosition_2 = new Vector2(ObjectInHand.transform.position.x - 1, ObjectInHand.transform.position.y - 1);  // bottom left of the parent
+            addedObjectPosition_3 = new Vector2(ObjectInHand.transform.position.x + 1, ObjectInHand.transform.position.y - 1);  //  bottom right of the parent
+            addedObjectPosition_4 = new Vector2(ObjectInHand.transform.position.x - 1, ObjectInHand.transform.position.y);  //  left of the parent
+            addedObjectPosition_5 = new Vector2(ObjectInHand.transform.position.x + 1, ObjectInHand.transform.position.y);  //  right of the parent
+            addedObjectPosition_6 = new Vector2(ObjectInHand.transform.position.x, ObjectInHand.transform.position.y + 1);  //  top of the parent
+            addedObjectPosition_7 = new Vector2(ObjectInHand.transform.position.x - 1, ObjectInHand.transform.position.y + 1);  //  top left of the parent
+            addedObjectPosition_8 = new Vector2(ObjectInHand.transform.position.x + 1, ObjectInHand.transform.position.y + 1);  //  top right of the parent
+        }
     }
 
     void RaycastBottom()

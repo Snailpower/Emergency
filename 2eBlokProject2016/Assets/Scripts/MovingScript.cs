@@ -108,8 +108,8 @@ public class MovingScript : MonoBehaviour {
             rightInput = KeyCode.RightArrow;*/
             jumpInput = KeyCode.Joystick1Button0;
 
-            horizontalAxis = Input.GetAxis("HorizontalPlayer1");
-            verticalAxis = Input.GetAxis("VerticalPlayer1");
+            horizontalAxis = Input.GetAxisRaw("HorizontalPlayer1");
+            verticalAxis = Input.GetAxisRaw("VerticalPlayer1");
         }
         else if (this.gameObject.tag == "Player2")
         {
@@ -118,23 +118,23 @@ public class MovingScript : MonoBehaviour {
             rightInput = KeyCode.D;*/
             jumpInput = KeyCode.Joystick2Button0;
 
-            horizontalAxis = Input.GetAxis("HorizontalPlayer2");
-            verticalAxis = Input.GetAxis("VerticalPlayer2");
+            horizontalAxis = Input.GetAxisRaw("HorizontalPlayer2");
+            verticalAxis = Input.GetAxisRaw("VerticalPlayer2");
 
         }
         else if (this.gameObject.tag == "Player3")
         {
             jumpInput = KeyCode.Joystick3Button0;
 
-            horizontalAxis = Input.GetAxis("HorizontalPlayer3");
-            verticalAxis = Input.GetAxis("VerticalPlayer3");
+            horizontalAxis = Input.GetAxisRaw("HorizontalPlayer3");
+            verticalAxis = Input.GetAxisRaw("VerticalPlayer3");
         }
         else if (this.gameObject.tag == "Player4")
         {
             jumpInput = KeyCode.Joystick4Button0;
 
-            horizontalAxis = Input.GetAxis("HorizontalPlayer4");
-            verticalAxis = Input.GetAxis("VerticalPlayer4");
+            horizontalAxis = Input.GetAxisRaw("HorizontalPlayer4");
+            verticalAxis = Input.GetAxisRaw("VerticalPlayer4");
         }
     }
 

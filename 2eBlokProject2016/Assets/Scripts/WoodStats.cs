@@ -63,6 +63,14 @@ public class WoodStats : MonoBehaviour {
                 RaycastScript.isThrown = false;
             }
 
+            if (other.gameObject.tag == "PlacedObject")
+            {
+                otherTreeValues.treeHP -= woodATK;
+
+                gameObject.tag = "Dirt";
+                RaycastScript.isThrown = false;
+            }
+
             if (other.gameObject.tag == "Player")
             {
                 otherPlayerValues.TakeDamage(woodATK);
@@ -101,6 +109,11 @@ public class WoodStats : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+
+        if (gameObject.tag == "PlacedObject")
+        {
+            gameObject.tag = "Wood";
+        }
 
         if (woodHP <= 0)
         {

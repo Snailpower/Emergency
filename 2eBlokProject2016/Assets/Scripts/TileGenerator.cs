@@ -79,7 +79,7 @@ public class TileGenerator : MonoBehaviour {
 
         for (int y = -11; y < 5; y++)
         {
-            for (int x = -22; x < 67; x++)
+            for (int x = -50; x < 97; x++)
             {
                 float newX = xStart + width * x;
                 float newY = yStart + height * y;

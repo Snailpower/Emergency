@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class StoneStats : MonoBehaviour {
 
@@ -9,7 +10,7 @@ public class StoneStats : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-
+        
 	}
 
     void OnCollisionEnter2D(Collision2D other)
@@ -100,7 +101,13 @@ public class StoneStats : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate () {
-	    
+
+        if (gameObject.tag == "PlacedObject")
+        {
+            gameObject.tag = "Stone";
+        }
+
+
         if (stoneHP <= 0)
         {
             Destroy(gameObject);

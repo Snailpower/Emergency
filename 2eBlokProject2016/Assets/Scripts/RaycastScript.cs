@@ -210,12 +210,10 @@ public class RaycastScript : MonoBehaviour {
               PickUpObject();
         }
 
-        //  second time spacebar is pressed
         else if (pickedUp == true && throwInput >= 0.5f && pickupInput == 0.0f && boolRB_Button==false)
         {
             ShootObject();
             isThrown = true;
-            arrow.SetActive(false);
         }
     }
 
@@ -224,14 +222,13 @@ public class RaycastScript : MonoBehaviour {
         Vector2 raycastposition = new Vector2(transform.position.x, transform.position.y - 1.5f);
         RaycastHit2D hit = Physics2D.Raycast(raycastposition, Vector2.down, rayLength);
 
-        Debug.Log(hit.collider.tag);
-
         if (hit.collider != null)
         {
             if (isGrounded && (hit.collider.gameObject.tag == "Dirt" || 
                     hit.collider.gameObject.tag == "Stone" ||
                     hit.collider.gameObject.tag == "Cloud" ||
                     hit.collider.gameObject.tag == "Wood"  ||
+                    hit.collider.gameObject.tag == "PlacedObject" ||
                     hit.collider.gameObject.tag == "Barrel"))    //  it works but it hits the player first
             {
                 GameObject other = hit.collider.gameObject;
@@ -240,6 +237,8 @@ public class RaycastScript : MonoBehaviour {
                 originalTag = other.tag;
                 other.tag = "PickedUpObject";
                 pickedUp = true;
+
+                hit.collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             }
         }
         else if (hit.collider == null)
@@ -265,12 +264,13 @@ public class RaycastScript : MonoBehaviour {
     void ShootObject()
     {
         Vector2 throwInput = new Vector2(throwDirectionInputHorizontal, throwDirectionInputVertical);
-        
+
+        ObjectInHand.GetComponent<BoxCollider2D>().enabled = true;
+           
         rigidbodyObjectInHand = ObjectInHand.GetComponent<Rigidbody2D>();  // Tom already has  a rigidbody
         rigidbodyObjectInHand.isKinematic = false;
 
         rigidbodyObjectInHand.AddForce(throwInput.normalized * throwForce);
-        Debug.Log("Horizontal" + throwDirectionInputHorizontal + "Vertical" + throwDirectionInputVertical);
 
         rigidbodyObjectInHand = null;
         pickedUp = false;
@@ -283,6 +283,8 @@ public class RaycastScript : MonoBehaviour {
             child.GetComponent<Rigidbody2D>().isKinematic = false;
             Debug.Log("child name: " + child.name);
         }
+
+        arrow.SetActive(false);
 
     }
 
@@ -343,6 +345,19 @@ public class RaycastScript : MonoBehaviour {
                     // check tag and change the tag back to its original
                     ObjectInHand.tag = originalTag;
 
+                    // turns collisions back on
+                    ObjectInHand.GetComponent<BoxCollider2D>().enabled = true;
+
+                    int childrenAmount = childrenList.Count;
+
+                    for (int i = 0; i <= childrenAmount -1; i++)
+                    {
+                        ObjectInHand.transform.GetChild(i).GetComponent<BoxCollider2D>().enabled = true;
+                        ObjectInHand.transform.GetChild(i).tag = "PlacedObject";
+
+                        childrenList.Clear();
+                    }
+
                     /* TO DO
                     for (int i = 0; i < ObjectInHand.transform.GetChildCount(); i++)
                     {
@@ -368,8 +383,6 @@ public class RaycastScript : MonoBehaviour {
             Vector2 raycastposition = new Vector2(transform.position.x, transform.position.y - 1.5f);
             RaycastHit2D hit = Physics2D.Raycast(raycastposition, Vector2.down, rayLength);
 
-            Debug.Log(hit.collider.tag);
-
             if (hit.collider != null)
             {
                 if (isGrounded && (hit.collider.gameObject.tag == "Dirt" ||
@@ -382,6 +395,7 @@ public class RaycastScript : MonoBehaviour {
                     
                     originalTag = other.tag;
                     other.tag = "PickedUpObject";
+                    other.GetComponent<BoxCollider2D>().enabled = false;
 
                     if (raycastIncrement == 1){ other.transform.position = addedObjectPosition_1; }
                     if (raycastIncrement == 2){ other.transform.position = addedObjectPosition_2; }

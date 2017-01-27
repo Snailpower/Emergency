@@ -111,7 +111,12 @@ public class DirtStats : MonoBehaviour {
 
         //gameObject.transform.position.z(transform.position.x, transform.position.y, 0.0f);
 
-        if(dirtHP <= 0)
+        if (gameObject.tag == "PlacedObject")
+        {
+            gameObject.tag = "Dirt";
+        }
+
+        if (dirtHP <= 0)
         {
             Destroy(gameObject);
         }

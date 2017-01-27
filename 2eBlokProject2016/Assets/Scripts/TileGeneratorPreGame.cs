@@ -86,19 +86,19 @@ public class TileGeneratorPreGame : MonoBehaviour {
 
                 if (noise > 0.4f)
                 {
-                    Instantiate(dirtBGPrefab, new Vector3(newX, newY, 0), Quaternion.identity, backgroundTileStorage.transform);
+                    Instantiate(dirtBGPrefab, new Vector3(newX, newY, 1), Quaternion.identity, backgroundTileStorage.transform);
                     Instantiate(dirtBlockPrefab, new Vector3(newX, newY, 0), Quaternion.identity, levelBlockStorage.transform);
                 }
                 else if (y < 4 && noise < 0.4f)
                 {
-                    Instantiate(stoneBGPrefab, new Vector3(newX, newY, 0), Quaternion.identity, backgroundTileStorage.transform);
+                    Instantiate(stoneBGPrefab, new Vector3(newX, newY, 1), Quaternion.identity, backgroundTileStorage.transform);
                     Instantiate(stoneBlockPrefab, new Vector3(newX, newY, 0), Quaternion.identity, levelBlockStorage.transform);
                 }
 
                 //Sets the first layer of the ground to dirt
                 else if(y <= 4 && noise < 0.4f)
                 {
-                    Instantiate(dirtBGPrefab, new Vector3(newX, newY, 0), Quaternion.identity, backgroundTileStorage.transform);
+                    Instantiate(dirtBGPrefab, new Vector3(newX, newY, 1), Quaternion.identity, backgroundTileStorage.transform);
                     Instantiate(dirtBlockPrefab, new Vector3(newX, newY, 0), Quaternion.identity, levelBlockStorage.transform);
                 }
 

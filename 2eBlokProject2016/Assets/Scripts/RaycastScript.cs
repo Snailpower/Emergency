@@ -266,11 +266,31 @@ public class RaycastScript : MonoBehaviour {
         Vector2 throwInput = new Vector2(throwDirectionInputHorizontal, throwDirectionInputVertical);
 
         ObjectInHand.GetComponent<BoxCollider2D>().enabled = true;
-           
+
+        int childrenAmount = childrenList.Count;
+
+        for (int i = 0; i <= childrenAmount - 1; i++)
+        {
+            ObjectInHand.transform.GetChild(i).GetComponent<BoxCollider2D>().enabled = true;
+
+            ObjectInHand.transform.GetChild(i).GetComponent<Rigidbody2D>().isKinematic = false;
+            
+        }
+
         rigidbodyObjectInHand = ObjectInHand.GetComponent<Rigidbody2D>();  // Tom already has  a rigidbody
         rigidbodyObjectInHand.isKinematic = false;
 
         rigidbodyObjectInHand.AddForce(throwInput.normalized * throwForce);
+
+        for (int i = 0; i <= childrenAmount - 1; i++)
+        {
+            ObjectInHand.transform.GetChild(i).GetComponent<Rigidbody2D>().AddForce(throwInput.normalized * throwForce);
+
+            childrenList.Clear();
+        }
+           
+
+
 
         rigidbodyObjectInHand = null;
         pickedUp = false;
@@ -281,7 +301,6 @@ public class RaycastScript : MonoBehaviour {
         {
             child.GetComponent<Rigidbody2D>().AddForce(throwInput.normalized * throwForce);
             child.GetComponent<Rigidbody2D>().isKinematic = false;
-            Debug.Log("child name: " + child.name);
         }
 
         arrow.SetActive(false);
@@ -409,8 +428,6 @@ public class RaycastScript : MonoBehaviour {
                     
                     raycastIncrement++;
                     readyToAdd = false;
-                    Debug.Log("raycast increment: " + raycastIncrement);
-
                     //   add it to the array
                     childrenList.Add(other);
 

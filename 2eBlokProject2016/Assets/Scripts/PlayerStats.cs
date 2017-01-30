@@ -25,7 +25,7 @@ public class PlayerStats : MonoBehaviour {
     {
 
         playerCurrentHP = startingHP;
-
+        
         gameControllerScript = gameController.GetComponent<GameController>();
 	}
 	
@@ -35,7 +35,6 @@ public class PlayerStats : MonoBehaviour {
         if (damaged)
         {
             damageCoolDown -= Time.deltaTime;
-
             if (damageCoolDown <= 0)
             {
                 damaged = false;
@@ -43,14 +42,12 @@ public class PlayerStats : MonoBehaviour {
 
             }
         }
-
-
 	}
 
     public void TakeDamage(int amount)
     {
         damaged = true;
-
+        StartRedFlashing();
         playerCurrentHP -= amount;
 
         healthSlider.value = playerCurrentHP;
@@ -64,33 +61,45 @@ public class PlayerStats : MonoBehaviour {
 
     public void PlayerStatus()
     {
-
-            if (gameObject.tag == "Player")
-            {
-                gameControllerScript.player1Active = false;
-
-
-            }
-            else if (gameObject.tag == "Player2")
-            {
-                gameControllerScript.player2Active = false;
-
-
-            }
-            else if (gameObject.tag == "Player3")
-            {
-                gameControllerScript.player3Active = false;
-
-
-            }
-            else if (gameObject.tag == "Player4")
-            {
-                gameControllerScript.player4Active = false;
-
-
-            }
-
+        if (gameObject.tag == "Player")
+        {
+            gameControllerScript.player1Active = false;
         }
-
-
+        else if (gameObject.tag == "Player2")
+        {
+            gameControllerScript.player2Active = false;
+        }
+        else if (gameObject.tag == "Player3")
+        {
+            gameControllerScript.player3Active = false;
+        }
+        else if (gameObject.tag == "Player4")
+        {
+            gameControllerScript.player4Active = false;
+        }
     }
+
+    void StartRedFlashing()
+    {
+        StartCoroutine(RedFlashingCharacter());
+    }
+
+    public void StopRedFlashing()
+    {
+        StopCoroutine("StartRedFlashing");
+        GetComponentInChildren<Renderer>().material.color = Color.white;
+    }
+
+    IEnumerator RedFlashingCharacter()
+    {
+        GetComponentInChildren<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        GetComponentInChildren<Renderer>().material.color = Color.white;
+        yield return new WaitForSeconds(0.1f);
+        GetComponentInChildren<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        GetComponentInChildren<Renderer>().material.color = Color.white;
+    }
+}
+
+

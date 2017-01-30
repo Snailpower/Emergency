@@ -207,6 +207,7 @@ public class RaycastScript : MonoBehaviour {
         }
         if (pickedUp == false && pickupInput >= 0.5f && throwInput == 0.0f && boolRB_Button==false)
         {
+
               PickUpObject();
         }
 
@@ -219,6 +220,8 @@ public class RaycastScript : MonoBehaviour {
 
     void PickUpObject()
     {
+        GetComponent<PlayerStats>().StopRedFlashing();
+
         Vector2 raycastposition = new Vector2(transform.position.x, transform.position.y - 1.5f);
         RaycastHit2D hit = Physics2D.Raycast(raycastposition, Vector2.down, rayLength);
 
@@ -407,6 +410,7 @@ public class RaycastScript : MonoBehaviour {
                 if (isGrounded && (hit.collider.gameObject.tag == "Dirt" ||
                                    hit.collider.gameObject.tag == "Stone" ||
                                    hit.collider.gameObject.tag == "Cloud" ||
+                                   hit.collider.gameObject.tag == "Wood" ||
                                    hit.collider.gameObject.tag == "Barrel"))    //  it works but it hits the player first
                 {
                     GameObject other = hit.collider.gameObject;

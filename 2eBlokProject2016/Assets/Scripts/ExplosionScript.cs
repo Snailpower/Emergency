@@ -67,6 +67,7 @@ public class ExplosionScript : MonoBehaviour {
         StoneStats otherStoneValues = col.gameObject.GetComponent<StoneStats>();
         TreeStats otherTreeValues = col.gameObject.GetComponent<TreeStats>();
         PlayerStats otherPlayerValues = col.gameObject.GetComponent<PlayerStats>();
+        BarrelStats otherBarrelValues = col.gameObject.GetComponent<BarrelStats>();
 
         if (exploded == true)
         {
@@ -109,6 +110,13 @@ public class ExplosionScript : MonoBehaviour {
                 otherTreeValues.treeHP -= barrelATK;
 
                 
+            }
+
+            if (col.gameObject.tag == "Barrel")
+            {
+                otherBarrelValues.barrelHP -= barrelATK;
+
+
             }
 
             if (col.gameObject.tag == "Player")

@@ -8,11 +8,15 @@ public class TileGenerator : MonoBehaviour {
 
     public GameObject cloudBlockPrefab;
 
+    public GameObject barrelPrefab;
+
     public GameObject dirtBlockPrefab;
     public GameObject stoneBlockPrefab;
 
     public GameObject backgroundTileStorage;
     public GameObject levelBlockStorage;
+    public GameObject barrelStorage;
+
     public GameObject treeStorage;
 
     public GameObject treePrefab;
@@ -28,7 +32,7 @@ public class TileGenerator : MonoBehaviour {
 
         GroundPatternGeneration();
         SkyPatternGeneration();
-
+        ExplosiveGeneration();
 
     }
 	
@@ -36,6 +40,34 @@ public class TileGenerator : MonoBehaviour {
 	void Update () {
 
         
+    }
+
+    void ExplosiveGeneration()
+    {
+        var renderer = barrelPrefab.GetComponent<Renderer>();
+
+        float width = renderer.bounds.size.x;
+        float height = renderer.bounds.size.y;
+
+        float xStart = 0.5f;
+        float yStart = 0.5f;
+
+        for (int y = 4; y <= 4; y++)
+        {
+            for (int x = -40; x < 87; x++)
+            {
+                float newX = xStart + width * x;
+                float newY = yStart + height * y;
+
+                float noise = Mathf.PerlinNoise(x, y / 10.0f) * Random.Range(cloudMin, cloudMax);
+
+                if (noise > 0.5f)
+                {
+                    Instantiate(barrelPrefab, new Vector3(newX, newY, 0), Quaternion.identity, barrelStorage.transform);
+                }
+
+            }
+        }
     }
 
     void SkyPatternGeneration()

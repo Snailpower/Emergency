@@ -20,6 +20,7 @@ public class WoodStats : MonoBehaviour {
         TreeStats otherTreeValues = other.gameObject.GetComponent<TreeStats>();
         WoodStats otherWoodValues = other.gameObject.GetComponent<WoodStats>();
         PlayerStats otherPlayerValues = other.gameObject.GetComponent<PlayerStats>();
+        BarrelStats otherBarrelValues = other.gameObject.GetComponent<BarrelStats>();
 
         if (gameObject.tag == "PickedUpObject")
         {
@@ -27,7 +28,7 @@ public class WoodStats : MonoBehaviour {
             {
                 otherDirtValues.dirtHP -= woodATK;
 
-                gameObject.tag = "Dirt";
+                gameObject.tag = "Wood";
                 RaycastScript.isThrown = false;
             }
 
@@ -35,7 +36,7 @@ public class WoodStats : MonoBehaviour {
             {
                 otherStoneValues.stoneHP -= woodATK;
 
-                gameObject.tag = "Dirt";
+                gameObject.tag = "Wood";
                 RaycastScript.isThrown = false;
             }
 
@@ -43,7 +44,7 @@ public class WoodStats : MonoBehaviour {
             {
                 otherCloudValues.cloudHP -= woodATK;
 
-                gameObject.tag = "Dirt";
+                gameObject.tag = "Wood";
                 RaycastScript.isThrown = false;
             }
 
@@ -51,7 +52,7 @@ public class WoodStats : MonoBehaviour {
             {
                 otherTreeValues.treeHP -= woodATK;
 
-                gameObject.tag = "Dirt";
+                gameObject.tag = "Wood";
                 RaycastScript.isThrown = false;
             }
 
@@ -59,7 +60,15 @@ public class WoodStats : MonoBehaviour {
             {
                 otherTreeValues.treeHP -= woodATK;
 
-                gameObject.tag = "Dirt";
+                gameObject.tag = "Wood";
+                RaycastScript.isThrown = false;
+            }
+
+            if (other.gameObject.tag == "Barrel")
+            {
+                otherBarrelValues.barrelHP -= woodATK;
+
+                gameObject.tag = "Wood";
                 RaycastScript.isThrown = false;
             }
 
@@ -67,7 +76,7 @@ public class WoodStats : MonoBehaviour {
             {
                 otherTreeValues.treeHP -= woodATK;
 
-                gameObject.tag = "Dirt";
+                gameObject.tag = "Wood";
                 RaycastScript.isThrown = false;
             }
 
@@ -75,7 +84,7 @@ public class WoodStats : MonoBehaviour {
             {
                 otherPlayerValues.TakeDamage(woodATK);
 
-                gameObject.tag = "Dirt";
+                gameObject.tag = "Wood";
                 RaycastScript.isThrown = false;
             }
 
@@ -83,7 +92,7 @@ public class WoodStats : MonoBehaviour {
             {
                 otherPlayerValues.TakeDamage(woodATK);
 
-                gameObject.tag = "Dirt";
+                gameObject.tag = "Wood";
                 RaycastScript.isThrown = false;
             }
 
@@ -91,7 +100,7 @@ public class WoodStats : MonoBehaviour {
             {
                 otherPlayerValues.TakeDamage(woodATK);
 
-                gameObject.tag = "Dirt";
+                gameObject.tag = "Wood";
                 RaycastScript.isThrown = false;
             }
 
@@ -99,7 +108,7 @@ public class WoodStats : MonoBehaviour {
             {
                 otherPlayerValues.TakeDamage(woodATK);
 
-                gameObject.tag = "Dirt";
+                gameObject.tag = "Wood";
                 RaycastScript.isThrown = false;
             }
         }

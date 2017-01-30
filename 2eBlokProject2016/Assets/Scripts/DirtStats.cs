@@ -26,6 +26,7 @@ public class DirtStats : MonoBehaviour {
         StoneStats otherStoneValues = other.gameObject.GetComponent<StoneStats>();
         TreeStats otherTreeValues = other.gameObject.GetComponent<TreeStats>();
         PlayerStats otherPlayerValues = other.gameObject.GetComponent<PlayerStats>();
+        BarrelStats otherBarrelValues = other.gameObject.GetComponent<BarrelStats>();
 
         if (gameObject.tag == "PickedUpObject")
             {
@@ -64,6 +65,14 @@ public class DirtStats : MonoBehaviour {
             if (other.gameObject.tag == "Wood")
             {
                 otherTreeValues.treeHP -= dirtATK;
+
+                gameObject.tag = "Dirt";
+                RaycastScript.isThrown = false;
+            }
+
+            if (other.gameObject.tag == "Barrel")
+            {
+                otherBarrelValues.barrelHP -= dirtATK;
 
                 gameObject.tag = "Dirt";
                 RaycastScript.isThrown = false;

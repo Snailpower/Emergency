@@ -152,13 +152,6 @@ public class MovingScript : MonoBehaviour {
         */
     }
 
-    void OnCollisionEnter2D()
-    { 
-            /*leftInput = KeyCode.A;
-            rightInput = KeyCode.D;*/
-        isGrounded = true;
-    }
-
     void RotateCharacter()
     {
         if(goingRight == true)

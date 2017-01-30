@@ -3,11 +3,11 @@ using System.Collections;
 
 public class GroundedScript : MonoBehaviour {
 
-    public MovingScript player;
+    private MovingScript player;
 
-    void OnTriggerEnter2D(Collider2D other)
+    void Start()
     {
-        player.isGrounded = true;
+        player = transform.parent.GetComponent<MovingScript>();
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -15,7 +15,7 @@ public class GroundedScript : MonoBehaviour {
         player.isGrounded = true;
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         player.isGrounded = false;
     }

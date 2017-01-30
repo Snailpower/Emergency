@@ -59,7 +59,7 @@ public class TileGenerator : MonoBehaviour {
 
                 if (noise > 0.4f)
                 {
-                    Instantiate(cloudBlockPrefab, new Vector3(newX, newY, 0), Quaternion.identity, levelBlockStorage.transform);
+                    //Instantiate(cloudBlockPrefab, new Vector3(newX, newY, 0), Quaternion.identity, levelBlockStorage.transform);
                 }
 
             }

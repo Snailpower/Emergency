@@ -32,8 +32,6 @@ public class WinText : MonoBehaviour {
         if (gameControllerScript.gameOver == true)
         {
             canvas.enabled = true;
-
-            Debug.Log("Game Over");
         }
 
         if (gameControllerScript.team1Win == true)

@@ -16,10 +16,22 @@ public class GameController : MonoBehaviour {
     public bool team1Win = false;
     public bool team2Win = false;
 
+    [SerializeField]
+    private Camera cameraTeam1;
+
+    [SerializeField]
+    private Camera cameraTeam2;
+
+    [SerializeField]
+    private Camera endCamera;
+
+
 	// Use this for initialization
 	void Start ()
     {
         playerStats = GetComponent<PlayerStats>();
+
+        endCamera.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -35,5 +47,22 @@ public class GameController : MonoBehaviour {
             team1Win = true;
             gameOver = true;
         }
+
+        CameraPanOut();
 	}
+
+
+    void CameraPanOut()
+    {
+        
+
+        if (gameOver)
+        {
+            cameraTeam1.enabled = false;
+            cameraTeam2.enabled = false;
+
+            endCamera.enabled = true;
+        }
+
+    }
 }

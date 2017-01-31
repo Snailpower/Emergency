@@ -66,7 +66,7 @@ public class RaycastScript : MonoBehaviour {
     private bool pickedUp = false;
     private bool puttingItDown = false;
     private bool buttonPlacementBool = false;
-    private bool boolRB_Button = false;
+    private bool boolLB_Button = false;
 
     private string originalTag;
 
@@ -109,7 +109,7 @@ public class RaycastScript : MonoBehaviour {
             throwDirectionInputHorizontal = Input.GetAxis("Horizontal2Player1");
             throwDirectionInputVertical = Input.GetAxis("Vertical2Player1");
             LB_Button = KeyCode.Joystick1Button4;
-            RB_Button = KeyCode.JoystickButton5;    //  TODO: make it for the other players.
+            RB_Button = KeyCode.JoystickButton5;    
         }
         else if (this.gameObject.tag == "Player2")
         {
@@ -205,13 +205,13 @@ public class RaycastScript : MonoBehaviour {
         {
             arrow.SetActive(true);
         }
-        if (pickedUp == false && pickupInput >= 0.5f && throwInput == 0.0f && boolRB_Button==false)
+        if (pickedUp == false && pickupInput >= 0.5f && throwInput == 0.0f && boolLB_Button==false)
         {
 
               PickUpObject();
         }
 
-        else if (pickedUp == true && throwInput >= 0.5f && pickupInput == 0.0f && boolRB_Button==false)
+        else if (pickedUp == true && throwInput >= 0.5f && pickupInput == 0.0f && boolLB_Button==false)
         {
             ShootObject();
             isThrown = true;
@@ -319,7 +319,7 @@ public class RaycastScript : MonoBehaviour {
         Ray ray = new Ray(transform.position, new Vector2(throwInput.x, throwInput.y)); //   TODO
 
         //  chooses where to place the object
-        if (Input.GetKeyDown(LB_Button))
+        if (Input.GetKeyDown(RB_Button))
         {
             buttonPlacementBool = true;
 
@@ -346,7 +346,7 @@ public class RaycastScript : MonoBehaviour {
         }
 
         //  places the object and destroys the reference to that objectby refering to an empty game object
-        if (Input.GetKeyUp(LB_Button))
+        if (Input.GetKeyUp(RB_Button))
         {
             buttonPlacementBool = false;
             
@@ -394,12 +394,13 @@ public class RaycastScript : MonoBehaviour {
 
     void PickAndAddGameObject()
     {
-        if (Input.GetKeyDown(RB_Button)){
-            boolRB_Button = true; }
-        if (Input.GetKeyUp(RB_Button)){
-            boolRB_Button = false;}
+        //if (Input.GetKeyDown(LB_Button)){
+           // boolLB_Button = false; }
+       // if (Input.GetKeyUp(LB_Button))
+       // {
+         //   boolLB_Button = true;}
 
-        if (pickedUp == true && pickupInput >= 0.5f && throwInput == 0.0f && boolRB_Button == true && readyToAdd == true && raycastIncrement <9)
+        if (pickedUp == true && throwInput == 0.0f && Input.GetKeyUp(LB_Button) && readyToAdd == true && raycastIncrement <9)
         {
             // raycast down
             Vector2 raycastposition = new Vector2(transform.position.x, transform.position.y - 1.5f);

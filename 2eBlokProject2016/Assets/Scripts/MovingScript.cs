@@ -31,12 +31,15 @@ public class MovingScript : MonoBehaviour {
 
     private Rigidbody2D playerRigidbody;
 
+    [SerializeField]
+    private GameObject playerModel;
+
     private Animator playerAnimator;
 
     // Use this for initialization
     void Start () {
 
-        playerAnimator = GetComponent<Animator>();
+        playerAnimator = playerModel.GetComponent<Animator>();
 
         playerRigidbody = player.GetComponent<Rigidbody2D>();
     }

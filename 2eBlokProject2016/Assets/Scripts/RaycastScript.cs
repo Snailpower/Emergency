@@ -109,7 +109,7 @@ public class RaycastScript : MonoBehaviour {
             throwDirectionInputHorizontal = Input.GetAxis("Horizontal2Player1");
             throwDirectionInputVertical = Input.GetAxis("Vertical2Player1");
             LB_Button = KeyCode.Joystick1Button4;
-            RB_Button = KeyCode.JoystickButton5;    
+            RB_Button = KeyCode.Joystick1Button5;    
         }
         else if (this.gameObject.tag == "Player2")
         {

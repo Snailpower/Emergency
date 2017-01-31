@@ -201,10 +201,18 @@ public class RaycastScript : MonoBehaviour {
 
     void RaycastBottom()
     {
-        if (pickedUp == true)
+        Vector2 aimInput = new Vector2(throwDirectionInputHorizontal, throwDirectionInputVertical);
+        Vector2 zeroInput = new Vector2(0, 0);
+
+        if (pickedUp == true && aimInput != zeroInput)
         {
             arrow.SetActive(true);
         }
+        else if (aimInput == zeroInput)
+        {
+            arrow.SetActive(false);
+        }
+
         if (pickedUp == false && pickupInput >= 0.5f && throwInput == 0.0f && boolLB_Button==false)
         {
 

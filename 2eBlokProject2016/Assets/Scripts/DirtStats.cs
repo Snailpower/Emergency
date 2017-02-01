@@ -7,14 +7,21 @@ public class DirtStats : MonoBehaviour {
 
     public int dirtATK = 1;
 
+    private ParticleManagerScript particleManager;
+
+    [SerializeField]
+    private GameObject particleManagerObject;
+
     //public RaycastScript playerController;
 
     // Use this for initialization
     void Start()
     {
+        particleManager = particleManagerObject.GetComponent<ParticleManagerScript>();
+
         //playerController = GetComponent<RaycastScript>();
 
-        
+
     }
 
 
@@ -30,6 +37,8 @@ public class DirtStats : MonoBehaviour {
 
         if (gameObject.tag == "PickedUpObject")
             {
+            particleManager.SpawnBigSpark(this.transform.position);
+
             if (other.gameObject.tag == "Dirt")
             {
                 otherDirtValues.dirtHP -= dirtATK;

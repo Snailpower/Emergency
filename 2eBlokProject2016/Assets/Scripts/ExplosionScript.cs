@@ -16,12 +16,17 @@ public class ExplosionScript : MonoBehaviour {
 
     CircleCollider2D explosionRadius;
 
+    private ParticleManagerScript particleManager;
+
+    [SerializeField]
+    private GameObject particleManagerObject;
+
     // Use this for initialization
     void Start ()
     {
         explosionRadius = gameObject.GetComponent<CircleCollider2D>();
 
-        
+        particleManager = particleManagerObject.GetComponent<ParticleManagerScript>();
     }
 	
 	// Update is called once per frame
@@ -81,7 +86,7 @@ public class ExplosionScript : MonoBehaviour {
 
                 colRigidbody.AddForce(direction);
 
-                Debug.Log("Boom");
+                particleManager.SpawnExplosion(this.transform.position);
             }
 
             if (col.gameObject.tag == "Dirt")

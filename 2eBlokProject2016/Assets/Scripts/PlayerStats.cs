@@ -20,9 +20,16 @@ public class PlayerStats : MonoBehaviour {
     [SerializeField]
     private float damageCoolDown = 1f;
 
+    private ParticleManagerScript particleManager;
+
+    [SerializeField]
+    private GameObject particleManagerObject;
+
     // Use this for initialization
     void Start ()
     {
+
+        particleManager = particleManagerObject.GetComponent<ParticleManagerScript>();
 
         playerCurrentHP = startingHP;
         
@@ -46,6 +53,8 @@ public class PlayerStats : MonoBehaviour {
 
     public void TakeDamage(int amount)
     {
+        particleManager.SpawnDamageSoundPlayer(this.transform.position);
+
         damaged = true;
         StartRedFlashing();
         playerCurrentHP -= amount;

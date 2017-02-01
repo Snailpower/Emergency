@@ -6,12 +6,17 @@ public class StoneStats : MonoBehaviour {
 
     public int stoneHP = 4;
     public int stoneATK = 3;
-    
+
+    private ParticleManagerScript particleManager;
+
+    [SerializeField]
+    private GameObject particleManagerObject;
+
     // Use this for initialization
     void Start ()
     {
-        
-	}
+        particleManager = particleManagerObject.GetComponent<ParticleManagerScript>();
+    }
 
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -24,6 +29,8 @@ public class StoneStats : MonoBehaviour {
 
         if (gameObject.tag == "PickedUpObject")
         {
+            particleManager.SpawnBigSpark(this.transform.position);
+
             if (other.gameObject.tag == "Dirt")
             {
                 otherDirtValues.dirtHP -= stoneATK;

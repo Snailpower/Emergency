@@ -70,10 +70,17 @@ public class RaycastScript : MonoBehaviour {
 
     private string originalTag;
 
+    private ParticleManagerScript particleManager;
+
+    [SerializeField]
+    private GameObject particleManagerObject;
+
 
     void Start()
     {
         raycastposition = new Vector2(transform.position.x, transform.position.y - 0.5f);
+
+        particleManager = particleManagerObject.GetComponent<ParticleManagerScript>();
 
         arrow = gameObject.transform.GetChild(0).gameObject;
         child = gameObject.transform.GetChild(1).gameObject;
@@ -274,6 +281,8 @@ public class RaycastScript : MonoBehaviour {
 
     void ShootObject()
     {
+        particleManager.SpawnSmallSpark(ObjectInHand.transform.position);
+
         Vector2 throwInput = new Vector2(throwDirectionInputHorizontal, throwDirectionInputVertical);
 
         ObjectInHand.GetComponent<BoxCollider2D>().enabled = true;
@@ -387,6 +396,9 @@ public class RaycastScript : MonoBehaviour {
 
                         childrenList.Clear();
                     }
+
+                    particleManager.SpawnAfterBurner(this.transform.position);
+                    particleManager.SpawnAfterBurner(hit.transform.position);
 
                     /* TO DO
                     for (int i = 0; i < ObjectInHand.transform.GetChildCount(); i++)

@@ -7,10 +7,15 @@ public class WoodStats : MonoBehaviour {
 
     public int woodATK = 2;
 
+    private ParticleManagerScript particleManager;
+
+    [SerializeField]
+    private GameObject particleManagerObject;
+
     // Use this for initialization
     void Start () {
-	    
-	}
+        particleManager = particleManagerObject.GetComponent<ParticleManagerScript>();
+    }
 
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -24,6 +29,8 @@ public class WoodStats : MonoBehaviour {
 
         if (gameObject.tag == "PickedUpObject")
         {
+            particleManager.SpawnBigSpark(this.transform.position);
+
             if (other.gameObject.tag == "Dirt")
             {
                 otherDirtValues.dirtHP -= woodATK;
